@@ -1,0 +1,28 @@
+#! /bin/bash
+ 
+old_suffix=$1
+new_suffix=$2
+if (( $# < 2 || $# > 2 ))
+then
+    echo "$0: Incorrect number of arguments. Please enter 2 arguments" >&2
+    echo "$0: File cannot be renamed as number of arguments is too few." >&2
+exit 1 #
+fi
+
+for f in *.$old_suffix
+do
+    new_name=${f%.*}.$new_suffix
+
+    for g in *.$new_suffix
+    do
+   	 if [[ ${g%.*}.$new_suffix = $new_name ]]
+   	 then
+		echo "$0: Error: file with this name and subscript already exist." >&2
+		echo "$0: File cannot be renamed as a file with this name already exists." >&2
+   	 exit 1 #
+    fi
+    done
+    echo Rename $f to $new_name
+    mv $f $new_name
+done
+exit 0 #

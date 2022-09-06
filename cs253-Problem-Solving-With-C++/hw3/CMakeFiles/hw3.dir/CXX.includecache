@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/s/chopin/g/under/fisher25/cs253/hw3/main.cc
+iostream
+-
+cstdlib
+-
+string
+-
+fstream
+-
+

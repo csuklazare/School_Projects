@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/s/chopin/g/under/fisher25/cs253/hw4/Phobic.cc
+Phobic.h
+/s/chopin/g/under/fisher25/cs253/hw4/Phobic.h
+
+/s/chopin/g/under/fisher25/cs253/hw4/Phobic.h
+vector
+-
+iostream
+-
+climits
+-
+algorithm
+-
+string
+-
+

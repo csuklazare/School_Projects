@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/s/chopin/g/under/fisher25/cs253/hw6/Oval.h
+vector
+-
+algorithm
+-
+functional
+-
+iostream
+-
+
+/s/chopin/g/under/fisher25/cs253/hw6/test.cc
+Oval.h
+/s/chopin/g/under/fisher25/cs253/hw6/Oval.h
+Oval.h
+/s/chopin/g/under/fisher25/cs253/hw6/Oval.h
+cassert
+-
+iostream
+-
+sstream
+-
+string
+-
+

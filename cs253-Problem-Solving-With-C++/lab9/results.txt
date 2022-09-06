@@ -1,0 +1,33 @@
+1. New returns a void * because it is pointing to the location in memory that has been allocatrd with malloc. It doens't matter what type was passed to it, that only determines how much memory should be allocated.
+
+2. 
+  a.
+    line 26 - the regular new operator is called, not the one inside class Foo, since p is not of type Foo.
+    line 27 - the operator new is called inside the class Foo as q is of type Foo and new doesn't have parenthesis so we know it isn't a function. It is an operator.
+    line 28 - the operator new function is called inside the class Foo as r is of type Foo and new doesn't have parenthesis so we know it isn't a function. It is an operator.
+    line 29 - the regular delete operator is called, not the one inside class Foo, since p is not of type Foo.
+    line 30 - the delete operator located inside the class Foo is called as q is of type Foo.
+    line 31 - the delete operator located inside the class Foo is called as r is of type Foo.
+    line 32 - no function is called as this is the return statement for main.
+  b.
+    These operators are declared static because Foo is a set size, so when the new function is called the first time, it knows how much memory it needs to allocate for each time new is called after. Same with delete.
+    
+3. It does not compile, because when new is called in line 16 as an operator, it tries to call the new function declared inside the class Foo. Since this new function was declared as private, the main method can't access it.
+
+4. It does not compile, because when the new funciton is called by Foo *p = &bar, it is deleted because it calls the delete function. So, when new is called later, it says it is a deleted function and can't access it.
+
+5. The ctor and dtor are protected so derived classes can still access them, like Foo.
+
+6. The cause of the error message is delete r, which is trying to delete the memory associated for r. However, since r was reinterpreted to an int, it is not of size Foo, and so there is no more memory to free. To improve catching of an error like this, I would include an if statement that would catch if the p address is in use or not.
+
+7. I would use a ^,/,!,*, or some special character to write to memory because none of these make a good int, double, or pointer, and the string implementation could be caught when reading from the memory by specifying which character to catch.
+
+8.
+  a. The size of class Foo is 8 bytes, or 64 bits. The difference between the values of p and q is 32 bytes, because the normal function of new allocates more bytes than what is needed for each of the classes of Foo. Hence the reason for 32 bytes instead of 8.
+  b. The size of class Bar is 8 bytes, or 64 bits. The difference between r and s is only 8 bytes, because since the new operator is overloaded to create a freelist of nodes, all with size 8 bytes, this allows the pointers to only offset exactly the memory required for a Bar object.
+  
+9. If we redefined the new and delete for class Foo, and derived Bar from class Foo, this would cause a compile error since Bar would not know which new and dleete to call. If Bar's new and delete were deleted, then yes they would be inherited. This would not work if size of bar > foo, because the number of bits that would be created/destroyed in memory would not match the size needed for Bar. To fix this, I would pass the new method a sizeof() variable, so it knew exactly how many bits it needs to create in memory.
+
+10. The ratio of time for 100 million instantiations of Bar and Foo, is 0.21 to 3.54, respectively. This means that the function pool.cc runs 16.8x faster than the function normal.cc. The reason for this is that pool.cc only allocates 8 bytes per each instance of Bar, so it can iterate much quicker than what normal.cc can, since it allocates 64 bytes per each instance of Foo.
+
+11. The ratio of space required for normal.cc and pool.cc is 3910840 to 200968, respectively, when creating 100 million instantiations of Foo and Bar. The official ratio of this is normal.cc is 19.4x bigger than pool.cc. The reason for this is that pool.cc only needs 8 bytes for each instance of Bar, and normal.cc needs 64 bytes.

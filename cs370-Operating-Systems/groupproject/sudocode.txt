@@ -1,0 +1,31 @@
+#receive input from computer through nodes.js to begin reaction test
+
+print("Please place finger on sensor and release when the LED lights up)
+
+delay = random.randint(0,9)
+led.off() - #make sure the LED is turned off at the beginning of the test
+
+#since the pressure sensor is a resistor in itself, it reduces voltage until it is pressed, then allows more voltage to run through
+While voltage < 2:
+	#Take a reading
+	input = GPIO.input(4)
+	# if input is higher than the last input, the finger has been placed on the pad, begin reaction test
+		print(the reaction test will begin in 3)
+		time.sleep(1)
+		print(2)
+		time.sleep(1)
+		print(1)
+		time.sleep(1)
+		print(0)
+		time.sleep(delay)
+		start_reaction_time = datetime.time()
+		led.on()
+		final_reaction_time = datetime.time()
+		result = final_reaction_time - start_reaction_time()
+		
+		
+	#pause slightly
+	time.sleep(0.5)
+
+return result to computer
+

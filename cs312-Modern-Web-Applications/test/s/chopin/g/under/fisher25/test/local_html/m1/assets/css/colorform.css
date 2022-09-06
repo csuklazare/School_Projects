@@ -1,0 +1,29 @@
+#colorformpage {
+    text-align: center;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+main{
+    border: 3px solid #04AA6D;
+    border-radius: 5%;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+button{
+    background-color: rgb(126, 126, 126);
+    cursor: pointer;
+    color: white;
+}
+#form_numColsRows {
+    border: 2px solid black;
+}
+#form_numcolors {
+    border: 2px solid black;
+}
+#form_{
+    background-color: rgb(126, 126, 126);
+    cursor: pointer;
+    color: white;
+}
