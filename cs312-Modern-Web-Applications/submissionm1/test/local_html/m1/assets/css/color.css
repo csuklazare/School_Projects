@@ -1,0 +1,35 @@
+#colorpage {
+    text-align: center;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+#first {
+    width: 90%;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}
+#first td {
+    border: 1px solid #000000;
+}
+td.columnOne {
+    width: 200px;
+}
+td.columnTwo {
+    width: 80%;
+}
+tbody select {
+    width: 100%;
+}
+select#colors {
+    width: 100%;
+}
+#second {
+    width: 90%;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}
+#second td {
+    border: 1px solid #000000;
+    width: 10px;
+}

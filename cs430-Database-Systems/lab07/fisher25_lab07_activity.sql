@@ -1,0 +1,12 @@
+insert into Book values ('96-42013-10510', 'Growing your own Weeds', '2012-06-24');
+insert into Published_by values ('96-42013-10510',10000);
+insert into Located_at values ('Main', '96-42013-10510', 1, 8, 3, 1);
+update Located_at set total_copies = 8 where lib_name = 'Main' and ISBN = '96-42103-10907';
+delete from Author where f_name = "Grace" and l_name = "Slick";
+insert into Author values (305, 'Commander', 'Adams');
+insert into Phone values ('970-555-5555', 'o');
+insert into Author_phone_nums values(305, '970-555-5555');
+insert into Located_at values ('South Park', '96-42013-10510', 1, 8, 3, 1);
+delete from Located_at where ISBN = (select ISBN from Book where Title = "Missing Tomorrow") and lib_name = "Main";
+update Located_at set total_copies = 4 and copies_not_checked_out = 4 where lib_name = "South Park" and ISBN = (select ISBN from Book where Title = 'Eating in the Fort');
+select * from database_audit;

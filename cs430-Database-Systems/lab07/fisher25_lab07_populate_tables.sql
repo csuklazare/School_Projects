@@ -1,0 +1,24 @@
+select 'LOADING Authors' as 'INFO';
+source Author.dump;
+select 'LOADING Books' as 'INFO';
+source Book.dump;
+select 'LOADING Members' as 'INFO';
+source Members.dump;
+select 'LOADING Phone numbers' as 'INFO';
+source Phone.dump;
+select 'LOADING Publishers' as 'INFO';
+source Publisher.dump;
+select 'LOADING Library' as 'INFO';
+source Library.dump;
+select 'LOADING Publisher phone numbers' as 'INFO';
+source Publisher_phone_nums.dump;
+select 'LOADING Written_by' as 'INFO';
+source Written_by.dump;
+select 'LOADING Authors phone numbers' as 'INFO';
+source Author_Phone_nums.dump;
+select 'LOADING Located_at' as 'INFO';
+source Located_at.dump
+select 'LOADING Borrowed_by' as 'INFO';
+source Borrowed_by.dump;
+select 'LOADING Published_by' as 'INFO';
+source Published_by.dump;

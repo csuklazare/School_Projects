@@ -1,0 +1,4 @@
+/s/chopin/g/under/fisher25/cs253/hw5/CMakeFiles/rebuild_cache.dir
+/s/chopin/g/under/fisher25/cs253/hw5/CMakeFiles/edit_cache.dir
+/s/chopin/g/under/fisher25/cs253/hw5/CMakeFiles/hw5.dir
+/s/chopin/g/under/fisher25/cs253/hw5/CMakeFiles/hw5.tar.dir

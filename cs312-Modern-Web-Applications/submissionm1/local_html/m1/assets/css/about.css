@@ -1,0 +1,90 @@
+#team {
+    text-align: center;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+#cards{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#Sam {
+    border: 3px solid #b474cc;
+    border-radius: 3%;
+    padding: 15px;
+    margin: 10px;
+    width: 20%;
+    height: 50%;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#Sam img{
+    float: left;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#Brock {
+    border: 3px solid #b474cc;
+    border-radius: 3%;
+    padding: 15px;
+    margin: 10px;
+    width: 20%;
+    height: 50%;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#Brock img{
+    float: left;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#Jacki {
+    border: 3px solid #b474cc;
+    border-radius: 3%;
+    padding: 15px;
+    margin: 10px;
+    width: 20%;
+    height: 50%;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#Jacki img{
+    float: left;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#Henry {
+    border: 3px solid #b474cc;
+    border-radius: 3%;
+    padding: 15px;
+    margin: 10px;
+    width: 20%;
+    height: 50%;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#Henry img{
+    float: left;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,96 @@
+Checkout_date: N/A
+Checkin_date: 06/10/2016
+ISBN: 96-42103-10800
+MemberID: 2011
+Book has been checked back in
+
+Checkout_date: 06/10/2016
+Checkin_date: N/A
+ISBN: 96-42103-10011
+MemberID: 2011
+Adding a new record to the table for book 96-42103-10011 and memberID 2011
+
+Checkout_date: 06/10/2016
+Checkin_date: N/A
+ISBN: 96-42103-10006
+MemberID: 2011
+Adding a new record to the table for book 96-42103-10006 and memberID 2011
+
+Checkout_date: N/A
+Checkin_date: 06/10/2016
+ISBN: 96-42103-10002
+MemberID: 2012
+Book has been checked back in
+
+Checkout_date: 06/10/2016
+Checkin_date: N/A
+ISBN: 96-42103-10604
+MemberID: 2012
+Adding a new record to the table for book 96-42103-10604 and memberID 2012
+
+Checkout_date: 06/10/2016
+Checkin_date: N/A
+ISBN: 96-42103-10709
+MemberID: 2012
+Adding a new record to the table for book 96-42103-10709 and memberID 2012
+
+Checkout_date: 06/10/2016
+Checkin_date: N/A
+ISBN: 97-34506-10709
+MemberID: 2012
+This book doesn't exist.
+
+Checkout_date: 06/10/2016
+Checkin_date: N/A
+ISBN: 96-42103-10022
+MemberID: 1400
+Adding a new record to the table for book 96-42103-10022 and memberID 1400
+
+Checkout_date: N/A
+Checkin_date: 06/11/2016
+ISBN: 96-42103-10401
+MemberID: 2020
+Book has been checked back in
+
+Checkout_date: 06/11/2016
+Checkin_date: N/A
+ISBN: 96-42103-10709
+MemberID: 2020
+Adding a new record to the table for book 96-42103-10709 and memberID 2020
+
+Checkout_date: N/A
+Checkin_date: 06/11/2016
+ISBN: 96-42103-11003
+MemberID: 2022
+Book has been checked back in
+
+Checkout_date: N/A
+Checkin_date: 06/11/2016
+ISBN: 96-42103-10109
+MemberID: 2022
+This book isn't currently checked out.
+
+Checkout_date: 06/11/2016
+Checkin_date: N/A
+ISBN: 96-42103-10093
+MemberID: 2022
+Adding a new record to the table for book 96-42103-10093 and memberID 2022
+
+Checkout_date: 06/11/2016
+Checkin_date: N/A
+ISBN: 97-12413-10093
+MemberID: 2022
+This book doesn't exist.
+
+Checkout_date: 06/11/2016
+Checkin_date: N/A
+ISBN: 96-42103-10093
+MemberID: 1800
+Adding a new record to the table for book 96-42103-10093 and memberID 1800
+
+Checkout_date: 06/11/2016
+Checkin_date: N/A
+ISBN: 96-42103-11709
+MemberID: 1800
+Adding a new record to the table for book 96-42103-11709 and memberID 1800
+

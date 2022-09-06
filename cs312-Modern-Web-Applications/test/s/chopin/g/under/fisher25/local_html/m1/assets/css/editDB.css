@@ -1,0 +1,28 @@
+main{
+  border: 3px solid #04AA6D;
+  border-radius: 5%;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+#dbTable {
+    width: 90%;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}
+
+#dbTable td {
+  border: 1px solid #000000;
+}
+#form_{
+  background-color: rgb(126, 126, 126);
+  cursor: pointer;
+  color: white;
+}
+#form_colorName{
+  margin-right: 3px;
+}
+#form_hexValue{
+  margin-right: 3px;
+}

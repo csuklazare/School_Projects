@@ -1,0 +1,12 @@
+#colorformpage {
+    text-align: center;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+input {
+    border: 2px solid black;
+}
+submit {
+    border: 2px solid black;
+}

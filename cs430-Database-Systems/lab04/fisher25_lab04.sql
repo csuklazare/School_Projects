@@ -1,0 +1,7 @@
+select first_name, last_name, salary from employees e inner join salaries s inner join current_dept_emp c where e.emp_no = s.emp_no and s.emp_no = c.emp_no and c.to_date = '9999-01-01' and s.to_date = '9999-01-01' and s.salary > 90000;
+select first_name, last_name, d.dept_name from employees e inner join current_dept_emp c inner join departments d where e.emp_no = c.emp_no and c.dept_no = d.dept_no and (d.dept_no = "d008" or d.dept_no = "d009") and c.to_date = '9999-01-01';
+select first_name, last_name, title from employees e inner join titles t where e.emp_no = t.emp_no and t.to_date = '9999-01-01' and e.gender = 'F' and t.title = "Technique Leader";
+select first_name, last_name, salary from employees e inner join salaries s inner join titles t where e.emp_no = s.emp_no and e.emp_no = t.emp_no and t.title != "Senior Engineer" and t.to_date = '9999-01-01' and s.to_date = '9999-01-01' order by salary;
+select first_name, last_name, birth_date from employees order by birth_date desc;
+select first_name, last_name from employees e inner join dept_manager d where e.emp_no = d.emp_no and d.to_date = '9999-01-01';
+select first_name, last_name, dept_name from employees e inner join salaries s inner join departments d inner join current_dept_emp c where e.emp_no = s.emp_no and c.emp_no = e.emp_no and d.dept_no = c.dept_no and c.to_date = '9999-01-01' and salary = (select max(salary) from salaries);

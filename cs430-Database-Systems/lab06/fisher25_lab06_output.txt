@@ -1,0 +1,135 @@
+MariaDB [fisher25]> source fisher25_lab06_relation_schema.sql
+Query OK, 0 rows affected (1.212 sec)
+
+Query OK, 0 rows affected (0.186 sec)
+
+Query OK, 0 rows affected (0.152 sec)
+
+Query OK, 0 rows affected (0.145 sec)
+
+Query OK, 0 rows affected (0.181 sec)
+
+Query OK, 0 rows affected (0.210 sec)
+
+Query OK, 0 rows affected (0.164 sec)
+
+Query OK, 0 rows affected (0.151 sec)
+
+Query OK, 0 rows affected (0.205 sec)
+
+Query OK, 0 rows affected (0.194 sec)
+
+Query OK, 0 rows affected (0.205 sec)
+
+MariaDB [fisher25]> source fisher25_lab06_SQL_Commands.sql
++-----------------+
+| INFO            |
++-----------------+
+| LOADING Authors |
++-----------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Author.dump', error: 2
++---------------+
+| INFO          |
++---------------+
+| LOADING Books |
++---------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Book.dump', error: 2
++-----------------+
+| INFO            |
++-----------------+
+| LOADING Members |
++-----------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Members.dump', error: 2
++-----------------------+
+| INFO                  |
++-----------------------+
+| LOADING Phone numbers |
++-----------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Phone.dump', error: 2
++--------------------+
+| INFO               |
++--------------------+
+| LOADING Publishers |
++--------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Publisher.dump', error: 2
++---------------------------------+
+| INFO                            |
++---------------------------------+
+| LOADING Publisher phone numbers |
++---------------------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Publisher_phone_nums.dump', error: 2
++--------------------+
+| INFO               |
++--------------------+
+| LOADING Written_by |
++--------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Written_by.dump', error: 2
++-------------------------------+
+| INFO                          |
++-------------------------------+
+| LOADING Authors phone numbers |
++-------------------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Author_Phone_nums.dump', error: 2
++---------------------+
+| INFO                |
++---------------------+
+| LOADING Borrowed_by |
++---------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Borrowed_by.dump', error: 2
++----------------------+
+| INFO                 |
++----------------------+
+| LOADING Published_by |
++----------------------+
+1 row in set (0.000 sec)
+
+ERROR: Failed to open file 'Published_by.dump', error: 2
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.000 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+Empty set (0.001 sec)
+
+MariaDB [fisher25]> 

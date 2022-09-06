@@ -1,0 +1,19 @@
+exp1: delete[] not called
+
+exp2: x[10] is not valid as x is not an array, but a pointer to an array. "delete[] x"  would also need to be called in order to free the allocated memory.
+
+exp3: x was never initialized to a value, so it can't compare if x == 0. X only becomes initialized if time(nullptr) == 42 (which would never happen as way more seconds have passed than 42).
+
+exp4: y was never initialized to a value, so foo(y) is using an uninitialized value. Y only becomes initialized if now == 0 (which would never happen as time(nullptr != 0).
+
+exp5: The program is trying to write to an index outside of the array's indexes.
+
+exp6: The program is trying to read from an array after the allocated memory for it has been deleted.
+
+exp7: Only delete is called, not delete[]. delete[] needs called to delete the array p is pointing to.
+
+exp8: The free() function is used instead of delete. free() is used when memory is allocated with malloc() or calloc(). Delete is used when memory is allocated with new.
+
+exp9: Since a is incremented by 3, it is no longer pointing to the first index of the array, creating an invalid pointer. When delete[] is called, it deletes whatever a is now pointing at, not the array.
+
+exp10: Since both a and b are unsigned ints, modular arithmetic takes place, causing the value to wrap around.
