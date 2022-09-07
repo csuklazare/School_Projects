@@ -1,0 +1,768 @@
+{
+  "info": {
+    "_postman_id": "f414be5e-6cda-41b2-804f-f732931bc9b3",
+    "name": "cs314-collection-template",
+    "description": "This is a template collection for CS314.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Config",
+      "item": [
+        {
+          "name": "config-request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b68cfcd1-da7f-4b8d-a619-f0c3818eae05",
+                "exec": [
+                  "pm.test('tschroe - config endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - returnType is config', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"config\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - configResponsee contains distances', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.features).contains(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - configResponsee contains find', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.features).contains(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - configResponsee contains tour', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.features).contains(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - serverName is t17 The Moist Pigeons', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.serverName).to.eql(\"t17 The Moist Pigeons\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "0b8b66fb-f8d5-4240-86fb-30f0ed2d0c45",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\":\"config\"\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/config"
+          },
+          "response": []
+        }
+      ],
+      "id": "c5c34579-d9b6-4c79-97eb-7c95cee94a5b"
+    },
+    {
+      "name": "Distance",
+      "item": [
+        {
+          "name": "distance-request-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "db6310bb-5889-43bc-a881-ec7fcf89ae21",
+                "exec": [
+                  "pm.test('tschroe - distances endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is distances', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - earthRadius is unchanged', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(6378.0)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - distances are correct', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.places.length).to.eql(3);\r",
+                  "    const expectedDistances = [646, 13570, 12963];\r",
+                  "    for(let i = 0; i < returnedJSON.distances.length; i++) {\r",
+                  "        pm.expect(returnedJSON.distances[i]).to.eql(expectedDistances[i])\r",
+                  "    }\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "8e72bb50-0f53-4eb0-9d79-aacb7126ea9a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"requestType\" : \"distances\",\r\n  \"places\" : [\r\n    {\r\n      \"name\" : \"Lincoln, Nebraska\",\r\n      \"latitude\" : \"40.800609\",\r\n      \"longitude\" : \"-96.690728\"\r\n    },\r\n    {\r\n      \"name\" : \"Nowhere, Oklahoma\",\r\n      \"latitude\" : \"35.159769\",\r\n      \"longitude\" : \"-98.433014\"\r\n    },\r\n    {\r\n      \"name\" : \"Kolkata, West Bengal, India\",\r\n      \"latitude\" : \"22.57216\",\r\n      \"longitude\" : \"88.364461\"\r\n    }\r\n  ],\r\n  \"earthRadius\" : 6378\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "distance-request-2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f478801d-cb32-4e10-af37-96fa9924624b",
+                "exec": [
+                  "pm.test('tschroe - distances endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is distances', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - earthRadius is unchanged', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(6371.0)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - distances are correct', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.places.length).to.eql(10);\r",
+                  "    const expectedDistances = [3, 40, 254, 1711, 10141, 12677, 11190, 0, 1, 7381];\r",
+                  "    for(let i = 0; i < returnedJSON.distances.length; i++) {\r",
+                  "        pm.expect(returnedJSON.distances[i]).to.eql(expectedDistances[i])\r",
+                  "    }\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "5e18a638-1c36-4cff-a5cb-a16b6e921d4d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"requestType\"    : \"distances\",\r\n  \"places\"         : [{\"name\":\"Alaska Zoo\", \"latitude\":  \"61.14\",  \"longitude\": \"-149.79\"},\r\n                      {\"name\": \"Huffman Park\", \"latitude\":  \"61.11\", \"longitude\": \"-149.80\"},\r\n                      {\"name\": \"Alyeska Resort\", \"latitude\":  \"60.97\", \"longitude\": \"-149.10\"},\r\n                      {\"name\": \"Denali\", \"latitude\":  \"63.08\", \"longitude\": \"-151.00\"},\r\n                      {\"name\": \"Khatyrka\", \"latitude\":  \"62.06\", \"longitude\": \"175.28\"},\r\n                      {\"name\": \"Brisbane\", \"latitude\":  \"-27.37\", \"longitude\": \"153.03\"},\r\n                      {\"name\": \"Antofagasta\", \"latitude\":  \"-23.58\", \"longitude\": \"-70.43\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Dom Treasury\", \"latitude\":  \"50.94\", \"longitude\": \"6.96\"}\r\n                      ],\r\n  \"earthRadius\"    : 6371.0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "distance-request-3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c98ef135-5785-456c-a05e-4061493048fd",
+                "exec": [
+                  "pm.test('tschroe - distances endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is distances', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - earthRadius is unchanged', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(420.0)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - distances are correct', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.places.length).to.eql(5);\r",
+                  "    const expectedDistances = [358, 557, 786, 659, 442];\r",
+                  "    for(let i = 0; i < returnedJSON.distances.length; i++) {\r",
+                  "        pm.expect(returnedJSON.distances[i]).to.eql(expectedDistances[i])\r",
+                  "    }\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "329e7075-d78c-4a53-9379-2b895f755680",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"places\": [\r\n        {\r\n            \"name\": \"Never\",\r\n            \"latitude\": \"60.0\",\r\n            \"longitude\": \"-9.0\"\r\n        },\r\n        {\r\n            \"name\": \"Gonna\",\r\n            \"latitude\": \"42.0\",\r\n            \"longitude\": \"69.0\"\r\n        },\r\n        {\r\n            \"name\": \"Give\",\r\n            \"latitude\": \"-17.2\",\r\n            \"longitude\": \"17.3\"\r\n        },\r\n        {\r\n            \"name\": \"You\",\r\n            \"latitude\": \"89.9\",\r\n            \"longitude\": \"-179.9\"\r\n        },\r\n        {\r\n            \"name\": \"Up\",\r\n            \"latitude\": \"0.1\",\r\n            \"longitude\": \"-0.1\"\r\n        }\r\n  ],\r\n  \"earthRadius\": 420,\r\n  \"requestType\": \"distances\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        }
+      ],
+      "id": "46630ee2-ff12-439d-91a2-73be7b65ee6a"
+    },
+    {
+      "name": "Tour",
+      "item": [
+        {
+          "name": "tour-request-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8d3153d8-1af8-49e6-99d0-bf24fd67a279",
+                "exec": [
+                  "pm.test('tschroe - distances endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response is JSON', function() {\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is tour', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - earthRadius is unchanged', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(6371.0);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places array is correct', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.response).to.equal(1);\r",
+                  "    pm.expect(returnedJSON.places).to.not.equal(null);\r",
+                  "    pm.expect(returnedJSON.places.length).to.eql(11);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test tour is optimized)', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + '/api/distances';\r",
+                  "    pm.sendRequest({\r",
+                  "        url: distanceURL,\r",
+                  "        method: 'POST',\r",
+                  "        body: {\r",
+                  "            mode: 'raw',\r",
+                  "            raw: JSON.stringify({'places': returnedJSON.places, 'earthRadius': returnedJSON.earthRadius, 'requestType': 'distances'})\r",
+                  "        }\r",
+                  "    }, function(err, res) {\r",
+                  "        let distanceJSON = res.json();\r",
+                  "        let optimizedSumDistance = 0;\r",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {\r",
+                  "            optimizedSumDistance = optimizedSumDistance + distanceJSON.distances[i];\r",
+                  "        };\r",
+                  "        pm.expect(optimizedSumDistance).is.lte(44224);\r",
+                  "    })\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "af47b6cf-0b65-4b61-8a5b-038bd5724a9b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \t\"requestType\"\t: \"tour\",\r\n  \t\"earthRadius\"\t: 6371.0,\r\n  \t\"response\"\t\t: 1,\r\n   \t\"places\"\t\t: [{\"name\":\"Alaska Zoo\", \"latitude\":  \"61.14\",  \"longitude\": \"-149.79\"},\r\n                      {\"name\": \"Huffman Park\", \"latitude\":  \"61.11\", \"longitude\": \"-149.80\"},\r\n                      {\"name\": \"Alyeska Resort\", \"latitude\":  \"60.97\", \"longitude\": \"-149.10\"},\r\n                      {\"name\": \"Denali\", \"latitude\":  \"63.08\", \"longitude\": \"-151.00\"},\r\n                      {\"name\": \"Khatyrka\", \"latitude\":  \"62.06\", \"longitude\": \"175.28\"},\r\n                      {\"name\": \"Brisbane\", \"latitude\":  \"-27.37\", \"longitude\": \"153.03\"},\r\n                      {\"name\": \"Antofagasta\", \"latitude\":  \"-23.58\", \"longitude\": \"-70.43\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Dom Treasury\", \"latitude\":  \"50.94\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Munich Residenz\", \"latitude\":  \"48.14\", \"longitude\": \"11.57\"}\r\n                      ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "tour-request-2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "634f69d2-ba91-4942-a441-0b29da70baef",
+                "exec": [
+                  "pm.test('tschroe - distances endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response is JSON', function() {\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is tour', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - earthRadius is unchanged', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(6371.0);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places array is correct', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.response).to.equal(1);\r",
+                  "    pm.expect(returnedJSON.places).to.not.equal(null);\r",
+                  "    pm.expect(returnedJSON.places.length).to.eql(12);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test tour is optimized', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + '/api/distances';\r",
+                  "    pm.sendRequest({\r",
+                  "        url: distanceURL,\r",
+                  "        method: 'POST',\r",
+                  "        body: {\r",
+                  "            mode: 'raw',\r",
+                  "            raw: JSON.stringify({'places': returnedJSON.places, 'earthRadius': returnedJSON.earthRadius, 'requestType': 'distances'})\r",
+                  "        }\r",
+                  "    }, function(err, res) {\r",
+                  "        let distanceJSON = res.json();\r",
+                  "        let optimizedSumDistance = 0;\r",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {\r",
+                  "            optimizedSumDistance = optimizedSumDistance + distanceJSON.distances[i];\r",
+                  "        };\r",
+                  "        pm.expect(optimizedSumDistance).is.lte(99647);\r",
+                  "    })\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "9e7e5b22-83f2-4c12-b7ce-75c6124d4ad0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"requestType\" : \"tour\",\r\n  \"earthRadius\" : 6371.0,\r\n  \"response\" : 1,\r\n  \"places\" : [{ \"name\" : \"13007 Southeast 212th Street\", \"latitude\" : \"47.41\", \"longitude\" : \"-122.17\" },\r\n              { \"name\" : \"Kissimmee\", \"latitude\" : \"28.16\", \"longitude\" : \"-81.38\" },\r\n              { \"name\" : \"Hodh El Gharbi\", \"latitude\" : \"17.65\", \"longitude\" : \"-11.07\" },\r\n              { \"name\" : \"Föritztal\", \"latitude\" : \"50.43\", \"longitude\" : \"11.25\" },\r\n              { \"name\" : \"Greenland\", \"latitude\" : \"82.35\", \"longitude\" : \"-37.96\" },\r\n              { \"name\" : \"Sermersooq\", \"latitude\" : \"65.17\", \"longitude\" : \"-44.29\" },\r\n              { \"name\" : \"Inuvik Region\", \"latitude\" : \"70.46\", \"longitude\" : \"-113.19\" },\r\n              { \"name\" : \"Manitoba\", \"latitude\" : \"51.74\", \"longitude\" : \"-101.24\"},\r\n              { \"name\" : \"160th Avenue\", \"latitude\" : \"42.96\", \"longitude\" : \"-95.27\" },\r\n              { \"name\" : \"Reeves County\", \"latitude\" : \"31.28\", \"longitude\" : \"-103.45\" },\r\n              { \"name\" : \"Macdonald Road\", \"latitude\" : \"36.74\", \"longitude\" : \"-78.75\" },\r\n              { \"name\" : \"Deseado\", \"latitude\" : \"-47.46\", \"longitude\" : \"-67.49\" }\r\n             ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "tour-request-3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "609c1236-dd42-4f37-8b1c-9c25c04ab23d",
+                "exec": [
+                  "pm.test('tschroe - distances endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response is JSON', function() {\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is tour', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - earthRadius is unchanged', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(8064.0);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places array is correct', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.response).to.equal(1);\r",
+                  "    pm.expect(returnedJSON.places).to.not.equal(null);\r",
+                  "    pm.expect(returnedJSON.places.length).to.eql(12);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test tour is optimized', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + '/api/distances';\r",
+                  "    pm.sendRequest({\r",
+                  "        url: distanceURL,\r",
+                  "        method: 'POST',\r",
+                  "        body: {\r",
+                  "            mode: 'raw',\r",
+                  "            raw: JSON.stringify({'places': returnedJSON.places, 'earthRadius': returnedJSON.earthRadius, 'requestType': 'distances'})\r",
+                  "        }\r",
+                  "    }, function(err, res) {\r",
+                  "        let distanceJSON = res.json();\r",
+                  "        let optimizedSumDistance = 0;\r",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {\r",
+                  "            optimizedSumDistance = optimizedSumDistance + distanceJSON.distances[i];\r",
+                  "        };\r",
+                  "        pm.expect(optimizedSumDistance).is.lte(89425);\r",
+                  "    })\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "09941bf4-f25f-49ed-ad74-ca21606c9893",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\"    : \"tour\",\r\n    \"earthRadius\"    : 8064.0,\r\n    \"response\"       : 1,\r\n    \"places\"         : \r\n    \r\n    [{\"name\":\"Numazu\",\"latitude\": \"35.0600\", \"longitude\": \"13.85145\"},\r\n     \r\n     {\"name\":\"Shenzhen\", \"latitude\": \"22.3318\", \"longitude\": \"114.0313\"},\r\n     \r\n     {\"name\":\"Fitchberg\", \"latitude\": \"42.3527\", \"longitude\": \"-71.4819\"},\r\n     \r\n     {\"name\":\"Toronto\", \"latitude\": \"43.4305\", \"longitude\": \"-79.2241\"},\r\n    \r\n     {\"name\":\"Otaru\", \"latitude\": \"43.0906\", \"longitude\": \"141.0407\"},\r\n     \r\n     {\"name\":\"Moscow\", \"latitude\": \"55.3455\", \"longitude\": \"37.2307\"},\r\n     \r\n     {\"name\":\"Nanning\", \"latitude\": \"22.4918\", \"longitude\": \"108.1709\"},\r\n     \r\n     {\"name\":\"Mishima\", \"latitude\": \"35.0757\", \"longitude\": \"138.5732\"},\r\n   \r\n     {\"name\":\"Yokohama\", \"latitude\": \"35.2709\", \"longitude\": \"139.3542\"},\r\n     \r\n     {\"name\":\"Melbourne\", \"latitude\": \"-37.5821\", \"longitude\": \"145.0311\"},\r\n     \r\n     {\"name\":\"Pakistan\", \"latitude\": \"30.2133\", \"longitude\": \"69.2053\"},\r\n   \r\n     {\"name\":\"Saannah\", \"latitude\": \"32.0219\", \"longitude\": \"-81.1201\"}\r\n    \r\n    ]\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        }
+      ],
+      "id": "52789f1c-ed75-4169-a12c-149f8a74c57e"
+    },
+    {
+      "name": "Find",
+      "item": [
+        {
+          "name": "find-request-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5fcfa93a-f9b1-40c1-a52e-939c2dc2c9ed",
+                "exec": [
+                  "pm.test('tschroe - find endpoint found', function () {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response is JSON', function () {\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function () {\r",
+                  "    pm.expect(pm.response.responseTime / 1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is find', function () {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places is less than or equal to limit', function () {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.places.length).to.lte(returnedJSON.limit);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places contains match string', function () {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    let containsMatchStringBool = 0;\r",
+                  "    for (let i = 0; i < returnedJSON.places.length; i++) {\r",
+                  "        if (returnedJSON.places[i].name.includes(returnedJSON.match) ||\r",
+                  "            returnedJSON.places[i].municipality.includes(returnedJSON.match) ||\r",
+                  "            returnedJSON.places[i].region.includes(returnedJSON.match)) {\r",
+                  "            containsMatchStringBool = 1;\r",
+                  "        }\r",
+                  "        pm.expect(containsMatchStringBool).to.eql(1);\r",
+                  "        containsMatchStringBool = 0;\r",
+                  "    }\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "8e847ee9-ae07-4028-9582-8d75614c8ae7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"requestType\":\"find\",\r\n  \"match\":\"Bryan\",\r\n  \"limit\": 7\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "find-request-2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a63d4bfd-cbe9-4ec5-af6f-189680b17302",
+                "exec": [
+                  "pm.test('tschroe - find endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response is JSON', function() {\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is find', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places is less than or equal to limit', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.places.length).to.lte(returnedJSON.limit);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places contains match string', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    let containsMatchStringBool = 0;\r",
+                  "    for (let i = 0; i < returnedJSON.places.length; i++) {\r",
+                  "        if(returnedJSON.places[i].name.includes(returnedJSON.match) || \r",
+                  "            returnedJSON.places[i].municipality.includes(returnedJSON.match) || \r",
+                  "            returnedJSON.places[i].region.includes(returnedJSON.match)) {\r",
+                  "            containsMatchStringBool = 1;\r",
+                  "        }\r",
+                  "        pm.expect(containsMatchStringBool).to.eql(1);\r",
+                  "        containsMatchStringBool = 0;\r",
+                  "    }\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "1aa9937c-fba4-401c-aea4-a6c0264aa53b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"limit\": 20,\r\n    \"match\": \"Alaska\",\r\n    \"requestType\": \"find\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "find-request-3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "86ed914b-4347-4c44-a988-c8ab6e70e4b8",
+                "exec": [
+                  "pm.test('tschroe - find endpoint found', function() {\r",
+                  "    pm.response.to.have.status(200)\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response is JSON', function() {\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - response time less than 1 second', function() {\r",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - requestType is find', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places is less than or equal to limit', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    pm.expect(returnedJSON.places.length).to.lte(returnedJSON.limit);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test('tschroe - test places contains match string', function() {\r",
+                  "    let returnedJSON = pm.response.json();\r",
+                  "    let containsMatchStringBool = 0;\r",
+                  "    for (let i = 0; i < returnedJSON.places.length; i++) {\r",
+                  "        if(returnedJSON.places[i].name.includes(returnedJSON.match) || \r",
+                  "            returnedJSON.places[i].municipality.includes(returnedJSON.match) || \r",
+                  "            returnedJSON.places[i].region.includes(returnedJSON.match)) {\r",
+                  "            containsMatchStringBool = 1;\r",
+                  "        }\r",
+                  "        pm.expect(containsMatchStringBool).to.eql(1);\r",
+                  "        containsMatchStringBool = 0;\r",
+                  "    }\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "6e3d3620-e4af-4ac7-8095-123693eaa30b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\": \"find\",\r\n    \"match\": \"St.\",\r\n    \"limit\": 8\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        }
+      ],
+      "id": "0d3ad91b-2678-4a64-b493-18f868a4809e"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "150bab93-d7c2-41df-b351-c447c192e931",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "610acaa8-a2ee-498b-bd03-d9065c55e8a0",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "18c87140-d2bb-437d-b867-30b09838234a",
+      "key": "CURRENT_VERSION",
+      "value": "1"
+    },
+    {
+      "id": "e5c9ef70-4444-4eb2-a048-4f65cce59f35",
+      "key": "BASE_URL",
+      "value": "http://localhost:41317"
+    },
+    {
+      "id": "1676e2fa-3475-4aad-84c6-907b956ea13e",
+      "key": "TEAM_NAME",
+      "value": "txx team name"
+    }
+  ]
+}

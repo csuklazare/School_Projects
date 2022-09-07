@@ -1,0 +1,23 @@
+{
+    "places"		: [{"name":"Lake California Air Park", "latitude":  "40.36109924316406",  "longitude": "-122.21600341796875"},
+                   {"name": "Colorado Antique Field", "latitude":  "40.122501373291016", "longitude": "-105.1719970703125"},
+                   {"name": "Nevada Municipal Airport", "latitude":  "37.85210037231445", "longitude": "-94.30490112304688"},
+                   {"name": "New Germany Seaplane Base", "latitude":  "44.54999923706055", "longitude": "-64.75"},
+                   {"name": "South Texas Project Heliport", "latitude":  "28.792200088500977", "longitude": "-96.04190063476562"},
+                   {"name": "Central Florida Regional Hospital Heliport", "latitude":  "28.813681", "longitude": "-81.283731"},
+                   {"name": "Fort Erie (Eurocopter Canada) Heliport", "latitude":  "42.921189708", "longitude": "-78.9561331272"},
+                   {"name": "Cozby-Germany Hospital Heliport", "latitude":  "32.67620086669922", "longitude": "-95.72630310058594"},
+                   {"name": "Nevada Dept of Wildlife State Headquarters Heliport", "latitude":  "39.5396003723", "longitude": "-119.806999207"},
+                   {"name": "Colorado Springs East Airport", "latitude":  "38.8744010925293", "longitude": "-104.41000366210938"},
+                   {"name": "California Title Building Heliport", "latitude":  "34.1239013671875", "longitude": "-118.1510009765625"},
+                   {"name": "Huffman Park", "latitude":  "61.11", "longitude": "-149.80"},
+                   {"name": "Alyeska Resort", "latitude":  "60.97", "longitude": "-149.10"},
+                   {"name": "Denali", "latitude":  "63.08", "longitude": "-151.00"},
+                   {"name": "Khatyrka", "latitude":  "62.06", "longitude": "175.28"},
+                   {"name": "Brisbane", "latitude":  "-27.37", "longitude": "153.03"},
+                   {"name": "Antofagasta", "latitude":  "-23.58", "longitude": "-70.43"},
+                   {"name": "Cologne Cathedral", "latitude":  "50.95", "longitude": "6.96"},
+                   {"name": "Cologne Cathedral", "latitude":  "50.95", "longitude": "6.96"},
+                   {"name": "Dom Treasury", "latitude":  "50.94", "longitude": "6.96"}
+                   ]
+}

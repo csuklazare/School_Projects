@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NearestNeighbor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tco</a> &gt; <a href="index.source.html" class="el_package">com.tco.misc</a> &gt; <span class="el_source">NearestNeighbor.java</span></div><h1>NearestNeighbor.java</h1><pre class="source lang-java linenums">package com.tco.misc;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Arrays;
+import com.tco.misc.GreatCircleDistance;
+
+public class NearestNeighbor {
+    public List&lt;Map&lt;String,String&gt;&gt; places;
+    public int[] tour;
+    public Boolean[] visitedCities;
+    public long[][] distanceMatrix;
+<span class="fc" id="L15">    public int shortestTourLength = 0;</span>
+    public double earthRadius;
+    public long responseTime;
+
+<span class="fc" id="L19">    public NearestNeighbor(List&lt;Map&lt;String,String&gt;&gt; placesArr, double myRadius, double myResponse) {</span>
+<span class="fc" id="L20">        this.earthRadius = myRadius;</span>
+<span class="fc" id="L21">        this.places = placesArr;</span>
+<span class="fc" id="L22">        this.responseTime = (long) myResponse * 1000000000;</span>
+
+<span class="fc" id="L24">        this.distanceMatrix = new long[places.size()][places.size()];</span>
+<span class="fc" id="L25">        computeDistanceMatrix();</span>
+        
+<span class="fc" id="L27">        this.tour = new int[places.size()];</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for(int i = 0; i &lt; this.tour.length; ++i) {</span>
+<span class="fc" id="L29">            tour[i] = i;</span>
+<span class="fc" id="L30">            shortestTourLength += distanceMatrix[0][i];</span>
+        }
+
+<span class="fc" id="L33">        this.visitedCities = new Boolean[places.size()];</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for(int i = 0; i &lt; this.visitedCities.length; ++i) {</span>
+<span class="fc" id="L35">            visitedCities[i] = false;</span>
+        }
+
+<span class="fc" id="L38">    }</span>
+
+    public void computeDistanceMatrix() {
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (int i = 0; i &lt; this.places.size(); i++) {</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            for (int j = 0; j &lt; this.places.size(); j++) {</span>
+<span class="fc" id="L43">                this.distanceMatrix[i][j] = GreatCircleDistance.calculate(Double.parseDouble(places.get(i).get(&quot;latitude&quot;)), Double.parseDouble(places.get(i).get(&quot;longitude&quot;)),</span>
+<span class="fc" id="L44">                                                       Double.parseDouble(places.get(j).get(&quot;latitude&quot;)), Double.parseDouble(places.get(j).get(&quot;longitude&quot;)), this.earthRadius);</span>
+            }
+        }
+<span class="fc" id="L47">    }</span>
+
+    public List&lt;Map&lt;String,String&gt;&gt; bestTrip() {
+<span class="fc" id="L50">        long startTime = System.nanoTime();</span>
+<span class="fc" id="L51">        int[] shortestTour = tour.clone();</span>
+
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i = 0; i &lt; places.size() - 1; i++) {</span>
+<span class="fc" id="L54">            int[] curTour = tour.clone();</span>
+<span class="fc" id="L55">            Boolean[] visited = visitedCities.clone();</span>
+<span class="fc" id="L56">            curTour[0] = i;</span>
+<span class="fc" id="L57">            visited[i] = true;</span>
+
+<span class="fc" id="L59">            int lastVisitedCity = i;</span>
+<span class="fc" id="L60">            int numVisited = 1;</span>
+<span class="fc" id="L61">            int curTourLength = 0;</span>
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            while (unvisitedCities(visited)) {</span>
+<span class="fc" id="L64">                int curShortest = -1;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">                for(int x = 0; x &lt; distanceMatrix.length; x++) {</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">                    if (visited[x] == false) {</span>
+<span class="fc" id="L67">                        curShortest = x;</span>
+                    }
+                }
+
+<span class="fc" id="L71">                curShortest = nearestCity(visited, curShortest, lastVisitedCity);</span>
+
+<span class="fc" id="L73">                curTour[numVisited] = curShortest;</span>
+<span class="fc" id="L74">                curTourLength += distanceMatrix[lastVisitedCity][curShortest];</span>
+<span class="fc" id="L75">                lastVisitedCity = curShortest;</span>
+<span class="fc" id="L76">                visited[lastVisitedCity] = true;</span>
+<span class="fc" id="L77">                numVisited++;</span>
+
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">                if ((System.nanoTime() - startTime) &gt;= responseTime) return places;</span>
+<span class="fc" id="L80">            }</span>
+
+<span class="fc" id="L82">            curTourLength += distanceMatrix[lastVisitedCity][i];</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">            if (curTourLength &lt; shortestTourLength) {</span>
+<span class="fc" id="L84">                shortestTour = curTour;</span>
+<span class="fc" id="L85">                shortestTourLength = curTourLength;</span>
+            }
+
+        }
+
+<span class="fc" id="L90">        int theHead = findTheHead(shortestTour, 0);</span>
+<span class="fc" id="L91">        return createPlaceArrayFromTour(orderedBestTrip(shortestTour, theHead), places);</span>
+    }
+
+    public ArrayList&lt;Map&lt;String,String&gt;&gt; createPlaceArrayFromTour(int[] tour, List&lt;Map&lt;String,String&gt;&gt; unoptPlaces) {
+<span class="fc" id="L95">        ArrayList&lt;Map&lt;String,String&gt;&gt; optTour = new ArrayList&lt;Map&lt;String,String&gt;&gt; ();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for(int i = 0; i &lt; tour.length; ++i) {</span>
+<span class="fc" id="L97">            optTour.add(unoptPlaces.get(tour[i]));</span>
+        }
+<span class="fc" id="L99">        return optTour;</span>
+    }
+    
+    public Boolean unvisitedCities(Boolean[] cities) {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (int i = 0; i &lt; cities.length; i++) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if (cities[i] == false) return true;</span>
+        }
+<span class="fc" id="L106">        return false;</span>
+    }
+
+    public int nearestCity(Boolean[] cities, int shortest, int curCity) {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        for (int i = 0; i &lt; distanceMatrix.length; i++) {</span>
+<span class="fc bfc" id="L111" title="All 4 branches covered.">            if ((cities[i] == false) &amp;&amp; (distanceMatrix[curCity][i] &lt;= distanceMatrix[curCity][shortest])) {</span>
+<span class="fc" id="L112">                shortest = i;</span>
+            }
+        }
+<span class="fc" id="L115">        return shortest;</span>
+    }
+
+    public int[] orderedBestTrip(int[] curTrip, int head) {
+<span class="fc" id="L119">        int[] sortedArr = curTrip.clone();</span>
+        
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        for (int i = head; i &lt; curTrip.length; i++) {</span>
+<span class="fc" id="L122">            sortedArr[i - head] = curTrip[i];</span>
+        }
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        for (int i = curTrip.length - head; i &lt; curTrip.length; i++) {</span>
+<span class="fc" id="L125">            sortedArr[i] = curTrip[i + head - curTrip.length];</span>
+        }
+
+<span class="fc" id="L128">        return sortedArr;</span>
+    }
+
+    public int findTheHead(int[] curTrip, int head) {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        for (int i = 1; i &lt; curTrip.length; i++) {</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">            if (curTrip[i] == 0) head = i;</span>
+        }
+        
+<span class="fc" id="L136">        return head;</span>
+    }
+    
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,9 @@
+com/tco/misc/TestJSONValidator.class
+com/tco/server/TestWebApplication.class
+com/tco/requests/TestTourRequest.class
+com/tco/server/TestMicroServer.class
+com/tco/requests/TestConfigRequest.class
+com/tco/requests/TestDistancesRequest.class
+TestNearestNeighbor.class
+com/tco/requests/TestFindRequest.class
+com/tco/misc/TestGreatCircleDistance.class

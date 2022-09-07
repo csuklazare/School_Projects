@@ -1,0 +1,620 @@
+{
+  "info": {
+    "_postman_id": "8002a325-3d04-45f7-9dcb-943650496844",
+    "name": "zypher-collections",
+    "description": "This is a template collection for CS314.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Config",
+      "item": [
+        {
+          "name": "ConfigTest",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "698cbd04-4b06-4ba1-9e40-9a026ca3c9c9",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is config\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"config\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - serverName is t17 The Moist Pigeons\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.serverName).to.eql(\"t17 The Moist Pigeons\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - features list contains 4 features\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.features.length).to.eql(4);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "ea6539b0-395c-4a09-bf45-dfedfcf6dc3b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\":\"config\"\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/config"
+          },
+          "response": []
+        }
+      ],
+      "id": "75116f73-3c58-4639-8bd0-38c2e3ea509c"
+    },
+    {
+      "name": "Find",
+      "item": [
+        {
+          "name": "FindReq_1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8e16b158-59e4-4b3d-b2c4-7de090e70c73",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is find\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct # found returned\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.found).to.eql(796);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - match doesn't change\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.match).to.eql(\"Alaska\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "96d5cd96-71a1-451d-bd03-454637e5f75f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\": \"find\",\r\n    \"match\": \"Alaska\",\r\n    \"limit\": 20\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "FindReq_2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1010eafe-da2d-4e3c-897b-1ea6b73793ae",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is find\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct # found returned\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.found).to.eql(0);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - match doesn't change\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.match).to.eql(\"Deenver\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "f8f65437-2853-4045-8772-7770d7907e43",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\": \"find\",\r\n    \"match\": \"Deenver\",\r\n    \"limit\": 20\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "FindReq_3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5c664138-e630-42ff-b439-27eb6e640691",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is find\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"find\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct # found returned\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.found).to.eql(39);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - match doesn't change\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.match).to.eql(\"Miami\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "3bf8c7e3-1f44-4fb5-97a6-3c4f40881840",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\": \"find\",\r\n    \"match\": \"Miami\",\r\n    \"limit\": 20\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        }
+      ],
+      "id": "5b518687-0f32-4b0a-880f-8eb8408c08ec"
+    },
+    {
+      "name": "Tour",
+      "item": [
+        {
+          "name": "TourReq_1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "91ef5185-0b49-445d-aaf7-1d22fe184289",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is tour\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - responseTime doesn't change\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.response).to.eql(1);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"zypher - list is optimized\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "let distanceURL = pm.environment.get(\"BASE_URL\") + \"/api/distances\";\r",
+                  "    pm.sendRequest({\r",
+                  "        url: distanceURL,\r",
+                  "        method: 'POST',\r",
+                  "        body: {\r",
+                  "            mode: 'raw',\r",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 6371, \"requestType\": \"distances\"})\r",
+                  "        }\r",
+                  "    }, function (err, res) {\r",
+                  "        let distanceJSON = res.json();\r",
+                  "        let optimizedSum = 0;\r",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {\r",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];\r",
+                  "        };\r",
+                  "        pm.expect(optimizedSum).is.lte(44013);\r",
+                  "    })\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "ff73ab7b-fecd-4640-af2d-10943a7f098d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \t\"requestType\"\t: \"tour\",\r\n  \t\"earthRadius\"\t: 6371.0,\r\n  \t\"response\"\t\t: 1,\r\n   \t\"places\"\t\t: [{\"name\":\"Alaska Zoo\", \"latitude\":  \"61.14\",  \"longitude\": \"-149.79\"},\r\n                      {\"name\": \"Huffman Park\", \"latitude\":  \"61.11\", \"longitude\": \"-149.80\"},\r\n                      {\"name\": \"Alyeska Resort\", \"latitude\":  \"60.97\", \"longitude\": \"-149.10\"},\r\n                      {\"name\": \"Denali\", \"latitude\":  \"63.08\", \"longitude\": \"-151.00\"},\r\n                      {\"name\": \"Khatyrka\", \"latitude\":  \"62.06\", \"longitude\": \"175.28\"},\r\n                      {\"name\": \"Brisbane\", \"latitude\":  \"-27.37\", \"longitude\": \"153.03\"},\r\n                      {\"name\": \"Antofagasta\", \"latitude\":  \"-23.58\", \"longitude\": \"-70.43\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n{\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n{\"name\": \"Dom Treasury\", \"latitude\":  \"50.94\", \"longitude\": \"6.96\"},\r\n{\"name\": \"Munich Residenz\", \"latitude\":  \"48.14\", \"longitude\": \"11.57\"}\r\n                      ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "TourReq_2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bba84d93-b5c2-4f18-aadc-650bfd45816f",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is tour\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - responseTime doesn't change\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.response).to.eql(1);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"zypher - list is optimized\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "let distanceURL = pm.environment.get(\"BASE_URL\") + \"/api/distances\";\r",
+                  "    pm.sendRequest({\r",
+                  "        url: distanceURL,\r",
+                  "        method: 'POST',\r",
+                  "        body: {\r",
+                  "            mode: 'raw',\r",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 6371, \"requestType\": \"distances\"})\r",
+                  "        }\r",
+                  "    }, function (err, res) {\r",
+                  "        let distanceJSON = res.json();\r",
+                  "        let optimizedSum = 0;\r",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {\r",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];\r",
+                  "        };\r",
+                  "        pm.expect(optimizedSum).is.lte(12696);\r",
+                  "    })\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "0417581a-e00f-4e2a-a4d6-5381a18f8f1e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \t\"requestType\"\t: \"tour\",\r\n  \t\"earthRadius\"\t: 6371.0,\r\n  \t\"response\"\t\t: 1,\r\n   \t\"places\"\t\t: [{\"name\":\"Lake California Air Park\", \"latitude\":  \"40.36109924316406\",  \"longitude\": \"-122.21600341796875\"},\r\n                      {\"name\": \"Colorado Antique Field\", \"latitude\":  \"40.122501373291016\", \"longitude\": \"-105.1719970703125\"},\r\n                      {\"name\": \"Nevada Municipal Airport\", \"latitude\":  \"37.85210037231445\", \"longitude\": \"-94.30490112304688\"},\r\n                      {\"name\": \"New Germany Seaplane Base\", \"latitude\":  \"44.54999923706055\", \"longitude\": \"-64.75\"},\r\n                      {\"name\": \"South Texas Project Heliport\", \"latitude\":  \"28.792200088500977\", \"longitude\": \"-96.04190063476562\"},\r\n                      {\"name\": \"Central Florida Regional Hospital Heliport\", \"latitude\":  \"28.813681\", \"longitude\": \"-81.283731\"},\r\n                      {\"name\": \"Fort Erie (Eurocopter Canada) Heliport\", \"latitude\":  \"42.921189708\", \"longitude\": \"-78.9561331272\"},\r\n                      {\"name\": \"Cozby-Germany Hospital Heliport\", \"latitude\":  \"32.67620086669922\", \"longitude\": \"-95.72630310058594\"},\r\n                      {\"name\": \"Nevada Dept of Wildlife State Headquarters Heliport\", \"latitude\":  \"39.5396003723\", \"longitude\": \"-119.806999207\"},\r\n                      {\"name\": \"Colorado Springs East Airport\", \"latitude\":  \"38.8744010925293\", \"longitude\": \"-104.41000366210938\"},\r\n                       {\"name\": \"California Title Building Heliport\", \"latitude\":  \"34.1239013671875\", \"longitude\": \"-118.1510009765625\"}\r\n                      ]\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "908d2e3b-332e-4202-be44-26d25d9110c4",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is tour\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"tour\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - responseTime doesn't change\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.response).to.eql(1);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"zypher - list is optimized\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "let distanceURL = pm.environment.get(\"BASE_URL\") + \"/api/distances\";\r",
+                  "    pm.sendRequest({\r",
+                  "        url: distanceURL,\r",
+                  "        method: 'POST',\r",
+                  "        body: {\r",
+                  "            mode: 'raw',\r",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 6371, \"requestType\": \"distances\"})\r",
+                  "        }\r",
+                  "    }, function (err, res) {\r",
+                  "        let distanceJSON = res.json();\r",
+                  "        let optimizedSum = 0;\r",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {\r",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];\r",
+                  "        };\r",
+                  "        pm.expect(optimizedSum).is.lte(52356);\r",
+                  "    })\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "00d67901-aa78-4916-ad7a-079d0109bd64",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"requestType\" : \"tour\",\r\n  \"earthRadius\" : 6371.0,\r\n  \"response\" : 1,\r\n  \"places\" : [{ \"name\" : \"13007 Southeast 212th Street\", \"latitude\" : \"47.41\", \"longitude\" : \"-122.17\" },\r\n              { \"name\" : \"Kissimmee\", \"latitude\" : \"28.16\", \"longitude\" : \"-81.38\" },\r\n              { \"name\" : \"Hodh El Gharbi\", \"latitude\" : \"17.65\", \"longitude\" : \"-11.07\" },\r\n              { \"name\" : \"Föritztal\", \"latitude\" : \"50.43\", \"longitude\" : \"11.25\" },\r\n              { \"name\" : \"Greenland\", \"latitude\" : \"82.35\", \"longitude\" : \"-37.96\" },\r\n              { \"name\" : \"Sermersooq\", \"latitude\" : \"65.17\", \"longitude\" : \"-44.29\" },\r\n              { \"name\" : \"Inuvik Region\", \"latitude\" : \"70.46\", \"longitude\" : \"-113.19\" },\r\n              { \"name\" : \"Manitoba\", \"latitude\" : \"51.74\", \"longitude\" : \"-101.24\"},\r\n              { \"name\" : \"160th Avenue\", \"latitude\" : \"42.96\", \"longitude\" : \"-95.27\" },\r\n              { \"name\" : \"Reeves County\", \"latitude\" : \"31.28\", \"longitude\" : \"-103.45\" },\r\n              { \"name\" : \"Macdonald Road\", \"latitude\" : \"36.74\", \"longitude\" : \"-78.75\" },\r\n              { \"name\" : \"Deseado\", \"latitude\" : \"-47.46\", \"longitude\" : \"-67.49\" }\r\n             ]\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        }
+      ],
+      "id": "0e9dcffc-4652-416d-967f-03c95f71aafb"
+    },
+    {
+      "name": "Distances",
+      "item": [
+        {
+          "name": "DistanceReq_1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "aaec7d16-54d3-42cf-b35a-ef2b9a5bc5e5",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is distances\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct # distances returned\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.distances.length).to.eql(4);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - earthRadius is not changed\", function() {\r",
+                  "let returnedJSON = pm.response.json()\r",
+                  "pm.expect(returnedJSON.earthRadius).to.eql(6371);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct distances returned\", function() {\r",
+                  "let returnedJSON = pm.response.json(); \r",
+                  "pm.expect(returnedJSON.distances[0]).to.eql(2208);\r",
+                  "pm.expect(returnedJSON.distances[1]).to.eql(1478);\r",
+                  "pm.expect(returnedJSON.distances[2]).to.eql(12030);\r",
+                  "pm.expect(returnedJSON.distances[3]).to.eql(11930);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "3a8654b9-34f6-43e5-9022-c29d6b35ebce",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"requestType\": \"distances\",\r\n\t\"places\": [\r\n\t\t{\r\n\t\t \"name\": \"Empire State Building\",\r\n\t\t \"latitude\": \"40.74\",\r\n\t\t \"longitude\": \"-73.98\"\r\n\t\t},\r\n\t\t{\r\n\t\t \"name\": \"American Airlines Center\",\r\n\t\t \"latitude\": \"32.79\",\r\n\t\t \"longitude\": \"-96.81\"\r\n\t\t},\r\n\t\t{\r\n\t\t \"name\": \"Devils Tower National Monument\",\r\n\t\t \"latitude\": \"44.59\",\r\n\t\t \"longitude\": \"-104.71\"\r\n\t\t},\r\n\t\t{\r\n\t\t \"name\": \"Taj Mahal\",\r\n\t\t \"latitude\": \"27.17\",\r\n\t\t \"longitude\": \"78.04\"\r\n\t\t}\r\n\t],\r\n\t\"earthRadius\": 6371.0\r\n\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "DistancesReq_2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "cad60dc6-dbd4-47da-96c0-1d149e48b1d9",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is distances\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct # distances returned\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.distances.length).to.eql(10);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - earthRadius is not changed\", function() {\r",
+                  "let returnedJSON = pm.response.json()\r",
+                  "pm.expect(returnedJSON.earthRadius).to.eql(6371);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct distances returned\", function() {\r",
+                  "let returnedJSON = pm.response.json(); \r",
+                  "pm.expect(returnedJSON.distances[0]).to.eql(3);\r",
+                  "pm.expect(returnedJSON.distances[1]).to.eql(40);\r",
+                  "pm.expect(returnedJSON.distances[2]).to.eql(254);\r",
+                  "pm.expect(returnedJSON.distances[3]).to.eql(1711);\r",
+                  "pm.expect(returnedJSON.distances[4]).to.eql(10141);\r",
+                  "pm.expect(returnedJSON.distances[5]).to.eql(12677);\r",
+                  "pm.expect(returnedJSON.distances[6]).to.eql(11190);\r",
+                  "pm.expect(returnedJSON.distances[7]).to.eql(0);\r",
+                  "pm.expect(returnedJSON.distances[8]).to.eql(1);\r",
+                  "pm.expect(returnedJSON.distances[9]).to.eql(7381);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "3a761cab-f6a8-467f-8353-3f481325a61a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"requestType\"    : \"distances\",\r\n  \"places\"         : [{\"name\":\"Alaska Zoo\", \"latitude\":  \"61.14\",  \"longitude\": \"-149.79\"},\r\n                      {\"name\": \"Huffman Park\", \"latitude\":  \"61.11\", \"longitude\": \"-149.80\"},\r\n                      {\"name\": \"Alyeska Resort\", \"latitude\":  \"60.97\", \"longitude\": \"-149.10\"},\r\n                      {\"name\": \"Denali\", \"latitude\":  \"63.08\", \"longitude\": \"-151.00\"},\r\n                      {\"name\": \"Khatyrka\", \"latitude\":  \"62.06\", \"longitude\": \"175.28\"},\r\n                      {\"name\": \"Brisbane\", \"latitude\":  \"-27.37\", \"longitude\": \"153.03\"},\r\n                      {\"name\": \"Antofagasta\", \"latitude\":  \"-23.58\", \"longitude\": \"-70.43\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\r\n                      {\"name\": \"Dom Treasury\", \"latitude\":  \"50.94\", \"longitude\": \"6.96\"}\r\n                      ],\r\n  \"earthRadius\"    : 6371.0\r\n}"
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "DistancesReq_3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "901ceccd-1091-41c1-923e-0360f982ab42",
+                "exec": [
+                  "pm.test(\"zypher - returns 200\" , function () {\r",
+                  "pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - returnType is distances\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.requestType).to.eql(\"distances\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct # distances returned\", function() {\r",
+                  "let returnedJSON = pm.response.json();\r",
+                  "pm.expect(returnedJSON.distances.length).to.eql(8);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - earthRadius is not changed\", function() {\r",
+                  "let returnedJSON = pm.response.json()\r",
+                  "pm.expect(returnedJSON.earthRadius).to.eql(3959);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"zypher - correct distances returned\", function() {\r",
+                  "let returnedJSON = pm.response.json(); \r",
+                  "pm.expect(returnedJSON.distances[0]).to.eql(70);\r",
+                  "pm.expect(returnedJSON.distances[1]).to.eql(60);\r",
+                  "pm.expect(returnedJSON.distances[2]).to.eql(766);\r",
+                  "pm.expect(returnedJSON.distances[3]).to.eql(1516);\r",
+                  "pm.expect(returnedJSON.distances[4]).to.eql(9797);\r",
+                  "pm.expect(returnedJSON.distances[5]).to.eql(8607);\r",
+                  "pm.expect(returnedJSON.distances[6]).to.eql(4709);\r",
+                  "pm.expect(returnedJSON.distances[7]).to.eql(1117);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "32d57156-b855-4e7a-861f-d53613419168",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n      {\r\n        \"name\" : \"Centennial, CO, USA\",\r\n        \"latitude\": \"39.580556\",\r\n        \"longitude\": \"-104.876944\"\r\n      },\r\n      {\r\n        \"name\" : \"Fort Collins, CO, USA\",\r\n        \"latitude\": \"40.585000\",\r\n        \"longitude\": \"-105.084167\"\r\n      },\r\n      {\r\n        \"name\" : \"Aurora, CO, USA\",\r\n        \"latitude\": \"39.729444\",\r\n        \"longitude\": \"-104.831667\"\r\n      },\r\n      {\r\n        \"name\" : \"Austin, TX, USA\",\r\n        \"latitude\": \"30.266944\",\r\n        \"longitude\": \"-97.743056\"\r\n      },\r\n      {\r\n        \"name\" : \"Rome, NY, USA\",\r\n        \"latitude\": \"43.212778\",\r\n        \"longitude\": \"-75.455556\"\r\n      },\r\n      {\r\n        \"name\" : \"Darwin, NT, AUS\",\r\n        \"latitude\": \"-12.463611\",\r\n        \"longitude\": \"130.844167\"\r\n      },\r\n      {\r\n        \"name\" : \"London, UK\",\r\n        \"latitude\": \"51.507222\",\r\n        \"longitude\": \"-0.1275\"\r\n      },\r\n      {\r\n        \"name\" : \"Vancouver, BC, CAN\",\r\n        \"latitude\": \"49.282778\",\r\n        \"longitude\": \"-123.121389\"\r\n      }\r\n    ],\r\n    \"earthRadius\": 3959.0\r\n  }"
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        }
+      ],
+      "id": "2aad583e-7792-4f8f-be10-5f369d26954a"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "6c2b74b9-8c83-4de6-93d9-8977be7bdc3e",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "d236f594-d7c2-434e-b57d-20eb58c92de7",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "07f89415-fc79-4464-9da4-e6a9a4126a25",
+      "key": "CURRENT_VERSION",
+      "value": "1"
+    },
+    {
+      "id": "5524df1a-d738-49b6-aa7d-16c34eb72a1d",
+      "key": "BASE_URL",
+      "value": "http://localhost:41317"
+    },
+    {
+      "id": "2112db4b-9e5b-4f74-b00d-172c29bfc390",
+      "key": "TEAM_NAME",
+      "value": "txx team name"
+    }
+  ]
+}

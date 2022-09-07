@@ -1,0 +1,9 @@
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/misc/TestJSONValidator.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/requests/TestFindRequest.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/misc/TestNearestNeighbor.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/misc/TestGreatCircleDistance.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/server/TestWebApplication.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/requests/TestDistancesRequest.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/server/TestMicroServer.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/requests/TestTourRequest.java
+/home/brock/Documents/cs314/t17/server/src/test/java/com/tco/requests/TestConfigRequest.java
