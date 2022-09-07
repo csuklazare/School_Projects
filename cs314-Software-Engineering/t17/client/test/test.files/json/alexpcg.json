@@ -1,0 +1,32 @@
+{
+    "requestType": "distances",
+    "places": [
+        {
+            "name": "Center of Northwestern Hemisphere",
+            "latitude": 45.000000,
+            "longitude": -90.000000
+        },
+        {
+            "name": "Center of Northeastern Hemisphere",
+            "latitude": 45.000000,
+            "longitude": 90.000000
+        },
+        {
+            "name": "Center of Southeastern Hemisphere",
+            "latitude": -45.000000,
+            "longitude": 90.000000
+        },
+        {
+            "name": "Center of Southwestern Hemisphere",
+            "latitude": -45.000000,
+            "longitude": -90.000000
+        }
+    ],
+    "earthRadius": 6371.0,
+    "distances": [
+        10082,
+        9955,
+        10019,
+        10019
+    ]
+}

@@ -1,0 +1,12 @@
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/requests/DistancesRequest.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/server/WebApplication.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/requests/TourRequest.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/requests/ConfigRequest.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/misc/JSONValidator.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/misc/BadRequestException.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/requests/FindRequest.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/server/MicroServer.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/misc/NearestNeighbor.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/misc/SQLAccess.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/misc/GreatCircleDistance.java
+/home/brock/Documents/cs314/t17/server/src/main/java/com/tco/requests/Request.java
