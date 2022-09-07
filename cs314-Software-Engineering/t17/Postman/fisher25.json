@@ -1,0 +1,746 @@
+{
+  "info": {
+    "_postman_id": "41fb7858-19db-4a43-b53f-ba8cdfdd6304",
+    "name": "fisher25-collection",
+    "description": "This is a template collection for CS314.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Config",
+      "item": [
+        {
+          "name": "config-request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d55e9599-c2b1-41f8-adae-a67c4e841c9a",
+                "exec": [
+                  "pm.test(\"fisher25 - returns 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is config\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"config\");",
+                  "});",
+                  "pm.test(\"fisher25 - serverName is t17 The Moist Pigeons\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.serverName).to.eql(\"t17 The Moist Pigeons\");",
+                  "});",
+                  "pm.test(\"fisher25 - features list contains 4 features\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.features.length).to.eql(4);",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "3d52e954-6388-42b2-9e51-86fe69a9acab",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\":\"config\"\n}"
+            },
+            "url": "{{BASE_URL}}/api/config"
+          },
+          "response": []
+        }
+      ],
+      "id": "34e82bb6-376b-45b4-b3e7-6fb44be7e12d"
+    },
+    {
+      "name": "Distances",
+      "item": [
+        {
+          "name": "distance-request-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "2299890a-af91-47f6-916d-3cebcb213078",
+                "exec": [
+                  "pm.test(\"fisher25 - distances endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is distances\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"distances\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct # distances returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.distances.length).to.eql(4);",
+                  "});",
+                  "pm.test(\"fisher25 - earthRadius not changed\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(6371);",
+                  "});",
+                  "pm.test(\"fisher25 - correct distances returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.distances[0]).to.eql(3330);",
+                  "    pm.expect(returnedJSON.distances[1]).to.eql(8037);",
+                  "    pm.expect(returnedJSON.distances[2]).to.eql(2541);",
+                  "    pm.expect(returnedJSON.distances[3]).to.eql(5376);",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "b3099850-264b-462c-bcd3-1f12dc41fbb0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"requestType\": \"distances\",\n\t\"places\": [\n\t\t{\n\t\t \"name\": \"The Great Pyramind of Giza\",\n\t\t \"latitude\": \"29.98\",\n\t\t \"longitude\": \"31.13\"\n\t\t},\n\t\t{\n\t\t \"name\": \"Saint Petersburg\",\n\t\t \"latitude\": \"59.93\",\n\t\t \"longitude\": \"30.36\"\n\t\t},\n\t\t{\n\t\t \"name\": \"The Big Buddha\",\n\t\t \"latitude\": \"7.83\",\n\t\t \"longitude\": \"98.31\"\n\t\t},\n\t\t{\n\t\t \"name\": \"Mount Everest\",\n\t\t \"latitude\": \"27.99\",\n\t\t \"longitude\": \"86.92\"\n\t\t}\n\t],\n\t\"earthRadius\": 6371.0\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/distances",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "distances"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "distance-request-2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "41fbb03a-825d-48a1-b440-a0b14f5c8618",
+                "exec": [
+                  "pm.test(\"fisher25 - distances endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is distances\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"distances\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct # distances returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.distances.length).to.eql(12);",
+                  "});",
+                  "pm.test(\"fisher25 - earthRadius not changed\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(2.090352E7);",
+                  "});",
+                  "pm.test(\"fisher25 - correct distances returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.distances[0]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[1]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[2]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[3]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[4]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[5]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[6]).to.eql(32835172);",
+                  "    pm.expect(returnedJSON.distances[7]).to.eql(49252758);",
+                  "    pm.expect(returnedJSON.distances[8]).to.eql(65670344);",
+                  "    pm.expect(returnedJSON.distances[9]).to.eql(65670344);",
+                  "    pm.expect(returnedJSON.distances[10]).to.eql(65670344);",
+                  "    pm.expect(returnedJSON.distances[11]).to.eql(32835172);",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "6e874d6d-efc8-4172-ba63-ba75795d41f8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"places\": [\n        {\n            \"latitude\": \"0\",\n            \"longitude\": \"0\"\n        },\n        {\n            \"latitude\": \"90\",\n            \"longitude\": \"180\"\n        },\n        {\n            \"latitude\": \"-0\",\n            \"longitude\": \"-0\"\n        },\n        {\n            \"latitude\": \"-90\",\n            \"longitude\": \"-180\"\n        },\n        {\n            \"latitude\": \"0.0\",\n            \"longitude\": \"0.0\"\n        },\n        {\n            \"latitude\": \"90.0\",\n            \"longitude\": \"180.0\"\n        },\n        {\n            \"latitude\": \"-0.0\",\n            \"longitude\": \"-0.0\"\n        },\n        {\n            \"latitude\": \"-90.0\",\n            \"longitude\": \"-180.0\"\n        },\n        {\n            \"latitude\": \"45\",\n            \"longitude\": \"90\"\n        },\n        {\n            \"latitude\": \"-45\",\n            \"longitude\": \"-90\"\n        },\n        {\n            \"latitude\": \"45.0\",\n            \"longitude\": \"90.0\"\n        },\n        {\n            \"latitude\": \"-45.0\",\n            \"longitude\": \"-90.0\"\n        }\n    ],\n    \"earthRadius\": 2.090352E7,\n    \"requestType\": \"distances\"\n}"
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "distance-request-3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "651c9119-8996-4d22-a60f-937ff3b54df7",
+                "exec": [
+                  "pm.test(\"fisher25 - distances endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is distances\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"distances\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct # distances returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.distances.length).to.eql(10);",
+                  "});",
+                  "pm.test(\"fisher25 - earthRadius not changed\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.earthRadius).to.eql(3959);",
+                  "});",
+                  "pm.test(\"fisher25 - correct distances returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.distances[0]).to.eql(0);",
+                  "    pm.expect(returnedJSON.distances[1]).to.eql(41);",
+                  "    pm.expect(returnedJSON.distances[2]).to.eql(580);",
+                  "    pm.expect(returnedJSON.distances[3]).to.eql(18);",
+                  "    pm.expect(returnedJSON.distances[4]).to.eql(6464);",
+                  "    pm.expect(returnedJSON.distances[5]).to.eql(8866);",
+                  "    pm.expect(returnedJSON.distances[6]).to.eql(8207);",
+                  "    pm.expect(returnedJSON.distances[7]).to.eql(2442);",
+                  "    pm.expect(returnedJSON.distances[8]).to.eql(58);",
+                  "    pm.expect(returnedJSON.distances[9]).to.eql(0);",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "c96fd0e5-cabd-4073-9d53-dcd9d00ac1f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [\n      {\n        \"name\" : \"Computer Science Department CSU\",\n        \"latitude\": \"40.574191\",\n        \"longitude\": \"-105.083432\"\n      },\n      {\n        \"name\" : \"New Belgium Brewery, Fort Collins, CO, USA\",\n        \"latitude\": \"40.585000\",\n        \"longitude\": \"-105.084167\"\n      },\n      {\n        \"name\" : \"\",\n        \"latitude\": \"40.009864\",\n        \"longitude\": \"-105.277168\"\n      },\n      {\n        \"name\" : \"NULL\",\n        \"latitude\": \"38.828504\",\n        \"longitude\": \"-94.497845\"\n      },\n      {\n        \"name\" : \"12345\",\n        \"latitude\": \"39.086745\",\n        \"longitude\": \"-94.576403\"\n      },\n      {\n        \"name\" : \"Prime Meridian\",\n        \"latitude\": \"0\",\n        \"longitude\": \"0\"\n      },\n      {\n        \"name\" : \"タワー大神宮\",\n        \"latitude\": \"35.658455\",\n        \"longitude\": \"139.745513\"\n      },\n      {\n        \"name\" : \"Centro Agronómico Tropical de Investigación y Enseñanza\",\n        \"latitude\": \"9.890328\",\n        \"longitude\": \"-83.655740\"\n      },\n      {\n        \"name\" : \"Denver Botanic Gardens\",\n        \"latitude\": \"39.732143\",\n        \"longitude\": \"-104.960136\"\n      },\n      {\n        \"name\" : \"Computer Science Department CSU\",\n        \"latitude\": \"40.574191\",\n        \"longitude\": \"-105.083432\"\n      }\n    ],\n    \"earthRadius\": 3959.0\n  }"
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        }
+      ],
+      "id": "c632c7f0-1b41-4d70-8393-1361359781f8"
+    },
+    {
+      "name": "FInd",
+      "item": [
+        {
+          "name": "find-request-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8979b943-19d4-4551-b281-288177363d3d",
+                "exec": [
+                  "pm.test(\"fisher25 - find endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is find\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"find\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct # found returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.found).to.eql(4);",
+                  "});",
+                  "pm.test(\"fisher25 - match doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.match).to.eql(\"NULL\");",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "daaf04a6-295d-48ba-bff8-b4358cdab523",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"match\": \"NULL\",\n    \"limit\": 20,\n    \"requestType\": \"find\"\n}"
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "find-request-2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "db3d9438-aef2-4792-9ae7-300775f4ac65",
+                "exec": [
+                  "pm.test(\"fisher25 - find endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is find\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"find\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct # found returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.found).to.eql(1);",
+                  "});",
+                  "pm.test(\"fisher25 - match doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.match).to.eql(\" .\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct place found\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.places[0].municipality).to.eql(\"Guacari\");",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "6bbb3438-9a03-465d-adf2-43cd708e4752",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"match\": \" .\",\n    \"limit\": 20,\n    \"requestType\": \"find\"\n}"
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "find-request-3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8455a902-3d43-41e1-a7ef-c46e7fce1a97",
+                "exec": [
+                  "pm.test(\"fisher25 - find endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is find\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"find\");",
+                  "});",
+                  "pm.test(\"fisher25 - correct # found returned\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.found).to.eql(6);",
+                  "});",
+                  "pm.test(\"fisher25 - match doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.match).to.eql(\"paco\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "e3eb67b5-e971-4498-a782-00b6d80cfb3c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\n{\n    \"limit\": 20,\n    \"match\": \"paco\",\n    \"requestType\": \"find\"\n}"
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        }
+      ],
+      "id": "2552f35f-ece2-4eec-9417-122d58ee5894"
+    },
+    {
+      "name": "Tour",
+      "item": [
+        {
+          "name": "tour-request-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "631bc445-b7e2-4593-8528-8fee50ef479c",
+                "exec": [
+                  "pm.test(\"fisher25 - tour endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is tour\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");",
+                  "});",
+                  "pm.test(\"fisher25 - response time doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.response).to.eql(1);",
+                  "});",
+                  "pm.test(\"fisher25 - list is optimized\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + \"/api/distances\";",
+                  "    pm.sendRequest({",
+                  "        url: distanceURL,",
+                  "        method: 'POST',",
+                  "        body: {",
+                  "            mode: 'raw',",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 3959, \"requestType\": \"distances\"})",
+                  "        }",
+                  "    }, function (err, res) {",
+                  "        let distanceJSON = res.json();",
+                  "        let optimizedSum = 0;",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(optimizedSum).is.lte(13797);",
+                  "    });",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "fe43121c-9e9e-4782-9fe6-7ad53bf6fd40",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \t\"requestType\"\t: \"tour\",\n  \t\"earthRadius\"\t: 3959.0,\n  \t\"response\"\t\t: 1,\n   \t\"places\"\t\t  : [\n                    {\"country\": \"Mexico\", \"defaultDisplayName\": \"Villa de Cos\", \"latitude\": \"23.375035009742795\", \"longitude\": \"-102.30293108492215\", \"municipality\": \"Villa de Cos\", \"region\": \"Zacatecas\",\"streetAddress\": \"\" },\n                    {\"country\": \"United States\", \"defaultDisplayName\": \"Tooele County\", \"latitude\": \"40.75766014997032\", \"longitude\": \"-112.85009520674566\", \"municipality\": \"Tooele County\", \"region\": \"Utah\", \"streetAddress\": \"\" },\n                    {\"country\": \"Canada\", \"defaultDisplayName\": \"Northern Saskatchewan Administration District\", \"latitude\": \"54.707168569101285\", \"longitude\": \"-108.4552362853457\", \"municipality\": \"Northern Saskatchewan Administration District\", \"region\": \"Saskatchewan\", \"streetAddress\": \"\" },\n                    {\"country\": \"Canada\", \"defaultDisplayName\": \"Unorganized Kenora District\", \"latitude\": \"55.061068237238196\", \"longitude\": \"-85.7788310140766\", \"municipality\": \"Unorganized Kenora District\", \"region\": \"Ontario\", \"streetAddress\": \"\" },\n                    {\"country\": \"Canada\", \"defaultDisplayName\": \"Eeyou Istchee James Bay\", \"latitude\": \"53.47006563435706\", \"longitude\": \"-73.64964046095014\", \"municipality\": \"Eeyou Istchee James Bay\", \"region\": \"Northern Quebec\", \"streetAddress\": \"\" },\n                    {\"country\": \"Canada\", \"defaultDisplayName\": \"Halifax Regional Municipality\", \"latitude\": \"44.881174324925844\", \"longitude\": \"-63.190747641194264\", \"municipality\": \"Halifax Regional Municipality\", \"region\": \"Nova Scotia\", \"streetAddress\": \"\" },\n                    {\"country\": \"Brazil\", \"defaultDisplayName\": \"Região Geográfica Imediata de Viana\", \"latitude\": \"-3.543576174276269\", \"longitude\": \"-45.08505964047808\", \"municipality\": \"Região Geográfica Imediata de Viana\", \"region\": \"Northeast Region\", \"streetAddress\": \"\" },\n                    {\"country\": \"Brazil\", \"defaultDisplayName\": \"Região Geográfica Imediata de Aquidauana - Anastácio\", \"latitude\": \"-19.588256546896318\", \"longitude\": \"-56.33587400028099\", \"municipality\": \"Região Geográfica Imediata de Aquidauana - Anastácio\", \"region\": \"Central-West Region\", \"streetAddress\": \"\" },\n                    {\"country\": \"Peru\", \"defaultDisplayName\": \"Santo Tomás\", \"latitude\": \"-14.804093978789314\", \"longitude\": \"-72.24420482075303\", \"municipality\": \"Santo Tomás\", \"region\": \"Province of Chumbivilcas\", \"streetAddress\": \"\" },\n                    {\"country\": \"Mexico\", \"defaultDisplayName\": \"San Pedro Tapanatepec\", \"latitude\": \"16.185661834157298\", \"longitude\": \"-94.3053564422339\", \"municipality\": \"San Pedro Tapanatepec\", \"region\": \"Oaxaca\", \"streetAddress\": \"\" },\n                    {\"country\": \"Mexico\", \"defaultDisplayName\": \"Calle Puebla\", \"latitude\": \"18.950453518130693\", \"longitude\": \"-96.94224143728245\", \"municipality\": \"San Rafael Calería\", \"postcode\": \"94559\", \"region\": \"Veracruz\", \"streetAddress\": \"Calle Puebla\" }\n                      ]\n}"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "tour-request-2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a7296821-29e6-454b-b22f-bec677b7facb",
+                "exec": [
+                  "pm.test(\"fisher25 - tour endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is tour\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");",
+                  "});",
+                  "pm.test(\"fisher25 - response time doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.response).to.eql(1);",
+                  "});",
+                  "pm.test(\"fisher25 - list is optimized\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + \"/api/distances\";",
+                  "    pm.sendRequest({",
+                  "        url: distanceURL,",
+                  "        method: 'POST',",
+                  "        body: {",
+                  "            mode: 'raw',",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 6371, \"requestType\": \"distances\"})",
+                  "        }",
+                  "    }, function (err, res) {",
+                  "        let distanceJSON = res.json();",
+                  "        let optimizedSum = 0;",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(optimizedSum).is.lte(776);",
+                  "    });",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "f566f713-1c5c-4540-a9f2-b36717cdf36c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 6371,\n    \"response\": 1,\n    \"places\":\n        [\n            {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Мошнівська сільська громада\",\n    \"latitude\": \"49.63922157582036\",\n    \"municipality\": \"Мошнівська сільська громада\",\n    \"postcode\": \"19611\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.636437991581786\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Бобрицька сільська громада\",\n    \"latitude\": \"49.8026729613763\",\n    \"municipality\": \"Бобрицька сільська громада\",\n    \"postcode\": \"19013\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.262894635591778\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Myronivka Urban Hromada\",\n    \"latitude\": \"49.788481637605265\",\n    \"municipality\": \"Myronivka Urban Hromada\",\n    \"postcode\": \"08824\",\n    \"region\": \"Kyiv Oblast\",\n    \"longitude\": \"31.043163249715324\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Myronivka Urban Hromada\",\n    \"latitude\": \"49.70324634505647\",\n    \"municipality\": \"Myronivka Urban Hromada\",\n    \"postcode\": \"08840\",\n    \"region\": \"Kyiv Oblast\",\n    \"longitude\": \"30.900337848895617\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Bohuslav Urban Hromada\",\n    \"latitude\": \"49.596491569639646\",\n    \"municipality\": \"Bohuslav Urban Hromada\",\n    \"postcode\": \"09720\",\n    \"region\": \"Kyiv Oblast\",\n    \"longitude\": \"30.900337848895617\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Bohuslav Urban Hromada\",\n    \"latitude\": \"49.45378753436951\",\n    \"municipality\": \"Bohuslav Urban Hromada\",\n    \"postcode\": \"09743\",\n    \"region\": \"Kyiv Oblast\",\n    \"longitude\": \"30.933297556777074\"\n  },\n    {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"Т-24-14\",\n    \"defaultDisplayName\": \"Т-24-14\",\n    \"latitude\": \"48.92937933587479\",\n    \"municipality\": \"Шполянська міська громада\",\n    \"postcode\": \"26010\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.75729025381388\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"О240604-4\",\n    \"defaultDisplayName\": \"О240604-4\",\n    \"latitude\": \"49.10240097962079\",\n    \"municipality\": \"Михайлівська сільська громада\",\n    \"postcode\": \"20824\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.988008208984187\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Червонослобідська сільська громада\",\n    \"latitude\": \"49.28916274708996\",\n    \"municipality\": \"Червонослобідська сільська громада\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"32.16379331768534\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Шевченківська сільська громада\",\n    \"latitude\": \"49.217414746263415\",\n    \"municipality\": \"Шевченківська сільська громада\",\n    \"postcode\": \"20212\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.08710952689062\"\n  },\n    {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Бобрицька сільська громада\",\n    \"latitude\": \"49.781384416137854\",\n    \"municipality\": \"Бобрицька сільська громада\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.471639452174433\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Звенигородська міська громада\",\n    \"latitude\": \"49.08080615937778\",\n    \"municipality\": \"Звенигородська міська громада\",\n    \"postcode\": \"20243\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.185988650535023\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Шполянська міська громада\",\n    \"latitude\": \"48.90770933741982\",\n    \"municipality\": \"Шполянська міська громада\",\n    \"postcode\": \"20643\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.361773759236222\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Новомиргородська міська громада\",\n    \"latitude\": \"48.78473506273615\",\n    \"municipality\": \"Новомиргородська міська громада\",\n    \"postcode\": \"26009\",\n    \"region\": \"Kirovohrad Oblast\",\n    \"longitude\": \"31.53755886793738\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Іркліївська сільська громада\",\n    \"latitude\": \"49.596491569639646\",\n    \"municipality\": \"Іркліївська сільська громада\",\n    \"postcode\": \"19932\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"32.229712733448295\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Новодмитрівська сільська громада\",\n    \"latitude\": \"49.73877925045435\",\n    \"municipality\": \"Новодмитрівська сільська громада\",\n    \"postcode\": \"19732\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"32.086887332628585\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Піщанська сільська громада\",\n    \"latitude\": \"49.75298513204287\",\n    \"municipality\": \"Піщанська сільська громада\",\n    \"postcode\": \"19724\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.91110222392739\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Піщанська сільська громада\",\n    \"latitude\": \"49.76008651288703\",\n    \"municipality\": \"Піщанська сільська громада\",\n    \"postcode\": \"19720\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.746303684520036\"\n  },\n    {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Стеблівська селищна громада\",\n    \"latitude\": \"49.32499764623276\",\n    \"municipality\": \"Стеблівська селищна громада\",\n    \"postcode\": \"19455\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"30.988230403246217\"\n  },\n  {\n    \"country\": \"Ukraine\",\n    \"streetAddress\": \"\",\n    \"defaultDisplayName\": \"Мошнівська сільська громада\",\n    \"latitude\": \"49.65345658567914\",\n    \"municipality\": \"Мошнівська сільська громада\",\n    \"postcode\": \"19611\",\n    \"region\": \"Cherkasy Oblast\",\n    \"longitude\": \"31.62545142228798\"\n        }\n    ]\n}"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "tour-request-3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "12dd5656-13b0-44f4-8eeb-b76a8e495367",
+                "exec": [
+                  "pm.test(\"fisher25 - tour endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is tour\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");",
+                  "});",
+                  "pm.test(\"fisher25 - response time doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.response).to.eql(3);",
+                  "});",
+                  "pm.test(\"fisher25 - list is optimized\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + \"/api/distances\";",
+                  "    pm.sendRequest({",
+                  "        url: distanceURL,",
+                  "        method: 'POST',",
+                  "        body: {",
+                  "            mode: 'raw',",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 3959, \"requestType\": \"distances\"})",
+                  "        }",
+                  "    }, function (err, res) {",
+                  "        let distanceJSON = res.json();",
+                  "        let optimizedSum = 0;",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(optimizedSum).is.lte(4);",
+                  "    });",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "65e0b4ed-f17d-46da-8385-9e961cba3af4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"tour\",\n    \"response\": 3,\n    \"earthRadius\": 3959.0,\n    \"places\": [\n      {\n        \"name\": \"Best Buy Fort Collins\",\n        \"latitude\": \"40.53101296454219\",\n        \"longitude\": \"-105.07535284102208\"\n      },\n      {\n        \"name\": \"Jeep Fort Collins\",\n        \"latitude\": \"40.5251942796776\",\n        \"longitude\": \"-105.07963980040736\"\n      },\n      {\n        \"name\": \"Walmart Fort Collins\",\n        \"latitude\": \"40.52216836389792\",\n        \"longitude\": \"-105.0797418708689\"\n      },\n      {\n        \"name\": \"Sam's Club Fort Collins\",\n        \"latitude\": \"40.521702826269056\",\n        \"longitude\": \"-105.06366577317411\"\n      },\n      {\n        \"name\": \"Home Depot Fort Collins\",\n        \"latitude\": \"40.5254658295423\",\n        \"longitude\": \"-105.0696879304058\"\n      },\n      {\n        \"name\": \"GoodWill Fort Collins\",\n        \"latitude\": \"40.526862354325175\",\n        \"longitude\": \"-105.0726479737909\"\n      },\n      {\n        \"name\": \"Auto Zone Fort Collins\",\n        \"latitude\": \"40.53867466850554\",\n        \"longitude\": \"-105.08273378363282\"\n      },\n      {\n        \"name\": \"Trader Joe's\",\n        \"latitude\": \"40.54070410378573\",\n        \"longitude\": \"-105.07652675809777\"\n      },\n      {\n        \"name\": \"Foothills Mall Fort Collins\",\n        \"latitude\": \"40.54394010313069\",\n        \"longitude\": \"-105.07385629362338\",\n        \"notes\": \"Top of the world\"\n      },\n      {\n        \"name\": \"Collindale Golf Course\",\n        \"latitude\": \"40.53735824537138\",\n        \"longitude\": \"-105.0505438604901\"\n      }\n    ]\n  }"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "tour-request-grid10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "72eee6d1-2747-4bf6-a8cd-49819a4f8ea7",
+                "exec": [
+                  "pm.test(\"fisher25 - tour endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is tour\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");",
+                  "});",
+                  "pm.test(\"fisher25 - response time doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.response).to.eql(1);",
+                  "});",
+                  "pm.test(\"fisher25 - list is optimized\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + \"/api/distances\";",
+                  "    pm.sendRequest({",
+                  "        url: distanceURL,",
+                  "        method: 'POST',",
+                  "        body: {",
+                  "            mode: 'raw',",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 3959, \"requestType\": \"distances\"})",
+                  "        }",
+                  "    }, function (err, res) {",
+                  "        let distanceJSON = res.json();",
+                  "        let optimizedSum = 0;",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(optimizedSum).is.lte(3753269);",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "d578825e-5aee-4b03-9861-365cbb3c79f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"tour\",\n    \"response\": 1,\n    \"earthRadius\": 3959.0,\n    \"places\":[\n        {\"name\":\"N9.4 E58.9\", \"latitude\":\"9.4\", \"longitude\":\"58.9\"},\n        {\"name\":\"S70.9 E78.7\", \"latitude\":\"-70.9\", \"longitude\":\"78.7\"},\n        {\"name\":\"S0.6 W89.4\", \"latitude\":\"-0.6\", \"longitude\":\"-89.4\"},\n        {\"name\":\"N79.8 E69.4\", \"latitude\":\"79.8\", \"longitude\":\"69.4\"},\n        {\"name\":\"N19.2 E120.9\", \"latitude\":\"19.2\", \"longitude\":\"120.9\"},\n        {\"name\":\"N29.8 E19.0\", \"latitude\":\"29.8\", \"longitude\":\"19.0\"},\n        {\"name\":\"N8.5 E99.4\", \"latitude\":\"8.5\", \"longitude\":\"99.4\"},\n        {\"name\":\"N79.4 E149.6\", \"latitude\":\"79.4\", \"longitude\":\"149.6\"},\n        {\"name\":\"S19.3 W91.1\", \"latitude\":\"-19.3\", \"longitude\":\"-91.1\"},\n        {\"name\":\"S50.4 W18.8\", \"latitude\":\"-50.4\", \"longitude\":\"-18.8\"},\n        {\"name\":\"N40.5 W51.6\", \"latitude\":\"40.5\", \"longitude\":\"-51.6\"},\n        {\"name\":\"S29.3 W109.0\", \"latitude\":\"-29.3\", \"longitude\":\"-109.0\"},\n        {\"name\":\"S69.1 E148.7\", \"latitude\":\"-69.1\", \"longitude\":\"148.7\"},\n        {\"name\":\"N41.5 W29.6\", \"latitude\":\"41.5\", \"longitude\":\"-29.6\"},\n        {\"name\":\"N29.4 E79.2\", \"latitude\":\"29.4\", \"longitude\":\"79.2\"},\n        {\"name\":\"S48.7 E159.3\", \"latitude\":\"-48.7\", \"longitude\":\"159.3\"},\n        {\"name\":\"S21.5 E149.9\", \"latitude\":\"-21.5\", \"longitude\":\"149.9\"},\n        {\"name\":\"S29.2 W91.4\", \"latitude\":\"-29.2\", \"longitude\":\"-91.4\"},\n        {\"name\":\"N19.6 W171.3\", \"latitude\":\"19.6\", \"longitude\":\"-171.3\"},\n        {\"name\":\"N51.1 W169.5\", \"latitude\":\"51.1\", \"longitude\":\"-169.5\"},\n        {\"name\":\"N61.5 W170.9\", \"latitude\":\"61.5\", \"longitude\":\"-170.9\"},\n        {\"name\":\"N30.9 E59.2\", \"latitude\":\"30.9\", \"longitude\":\"59.2\"},\n        {\"name\":\"N21.5 E111.4\", \"latitude\":\"21.5\", \"longitude\":\"111.4\"},\n        {\"name\":\"S50.1 W40.3\", \"latitude\":\"-50.1\", \"longitude\":\"-40.3\"},\n        {\"name\":\"S29.5 W40.7\", \"latitude\":\"-29.5\", \"longitude\":\"-40.7\"},\n        {\"name\":\"S81.3 E88.5\", \"latitude\":\"-81.3\", \"longitude\":\"88.5\"},\n        {\"name\":\"N0.9 W70.4\", \"latitude\":\"0.9\", \"longitude\":\"-70.4\"},\n        {\"name\":\"N50.4 W69.5\", \"latitude\":\"50.4\", \"longitude\":\"-69.5\"},\n        {\"name\":\"N39.3 E50.6\", \"latitude\":\"39.3\", \"longitude\":\"50.6\"},\n        {\"name\":\"S71.5 W9.6\", \"latitude\":\"-71.5\", \"longitude\":\"-9.6\"},\n        {\"name\":\"N58.8 E90.2\", \"latitude\":\"58.8\", \"longitude\":\"90.2\"},\n        {\"name\":\"N61.5 E40.2\", \"latitude\":\"61.5\", \"longitude\":\"40.2\"},\n        {\"name\":\"S59.9 E9.7\", \"latitude\":\"-59.9\", \"longitude\":\"9.7\"},\n        {\"name\":\"S11.4 W8.6\", \"latitude\":\"-11.4\", \"longitude\":\"-8.6\"},\n        {\"name\":\"S19.6 E118.9\", \"latitude\":\"-19.6\", \"longitude\":\"118.9\"},\n        {\"name\":\"N9.1 E11.3\", \"latitude\":\"9.1\", \"longitude\":\"11.3\"},\n        {\"name\":\"N10.6 W9.1\", \"latitude\":\"10.6\", \"longitude\":\"-9.1\"},\n        {\"name\":\"N31.2 E29.4\", \"latitude\":\"31.2\", \"longitude\":\"29.4\"},\n        {\"name\":\"S59.3 E49.5\", \"latitude\":\"-59.3\", \"longitude\":\"49.5\"},\n        {\"name\":\"S61.4 W9.3\", \"latitude\":\"-61.4\", \"longitude\":\"-9.3\"},\n        {\"name\":\"N30.4 E40.8\", \"latitude\":\"30.4\", \"longitude\":\"40.8\"},\n        {\"name\":\"N61.4 W59.6\", \"latitude\":\"61.4\", \"longitude\":\"-59.6\"},\n        {\"name\":\"N78.5 W30.3\", \"latitude\":\"78.5\", \"longitude\":\"-30.3\"},\n        {\"name\":\"N19.2 E38.5\", \"latitude\":\"19.2\", \"longitude\":\"38.5\"},\n        {\"name\":\"N1.0 W19.2\", \"latitude\":\"1.0\", \"longitude\":\"-19.2\"},\n        {\"name\":\"N18.6 W110.6\", \"latitude\":\"18.6\", \"longitude\":\"-110.6\"},\n        {\"name\":\"N79.3 E138.5\", \"latitude\":\"79.3\", \"longitude\":\"138.5\"},\n        {\"name\":\"N9.2 E20.1\", \"latitude\":\"9.2\", \"longitude\":\"20.1\"},\n        {\"name\":\"N18.9 W1.1\", \"latitude\":\"18.9\", \"longitude\":\"-1.1\"},\n        {\"name\":\"S10.2 E150.6\", \"latitude\":\"-10.2\", \"longitude\":\"150.6\"},\n        {\"name\":\"N68.4 W11.4\", \"latitude\":\"68.4\", \"longitude\":\"-11.4\"},\n        {\"name\":\"N20.0 E20.4\", \"latitude\":\"20.0\", \"longitude\":\"20.4\"},\n        {\"name\":\"N59.5 W31.2\", \"latitude\":\"59.5\", \"longitude\":\"-31.2\"},\n        {\"name\":\"N68.7 E128.8\", \"latitude\":\"68.7\", \"longitude\":\"128.8\"},\n        {\"name\":\"S49.9 E139.9\", \"latitude\":\"-49.9\", \"longitude\":\"139.9\"},\n        {\"name\":\"N9.8 E121.3\", \"latitude\":\"9.8\", \"longitude\":\"121.3\"},\n        {\"name\":\"N38.8 W61.1\", \"latitude\":\"38.8\", \"longitude\":\"-61.1\"},\n        {\"name\":\"N69.6 E109.8\", \"latitude\":\"69.6\", \"longitude\":\"109.8\"},\n        {\"name\":\"S79.6 W159.0\", \"latitude\":\"-79.6\", \"longitude\":\"-159.0\"},\n        {\"name\":\"S49.2 W71.3\", \"latitude\":\"-49.2\", \"longitude\":\"-71.3\"},\n        {\"name\":\"S30.6 E168.9\", \"latitude\":\"-30.6\", \"longitude\":\"168.9\"},\n        {\"name\":\"N80.0 W101.6\", \"latitude\":\"80.0\", \"longitude\":\"-101.6\"},\n        {\"name\":\"S38.5 W89.9\", \"latitude\":\"-38.5\", \"longitude\":\"-89.9\"},\n        {\"name\":\"S50.1 W58.6\", \"latitude\":\"-50.1\", \"longitude\":\"-58.6\"},\n        {\"name\":\"N71.3 E9.3\", \"latitude\":\"71.3\", \"longitude\":\"9.3\"},\n        {\"name\":\"S9.9 W150.8\", \"latitude\":\"-9.9\", \"longitude\":\"-150.8\"},\n        {\"name\":\"N40.5 W70.1\", \"latitude\":\"40.5\", \"longitude\":\"-70.1\"},\n        {\"name\":\"S20.3 W129.8\", \"latitude\":\"-20.3\", \"longitude\":\"-129.8\"},\n        {\"name\":\"N58.5 W119.6\", \"latitude\":\"58.5\", \"longitude\":\"-119.6\"},\n        {\"name\":\"S80.2 W49.7\", \"latitude\":\"-80.2\", \"longitude\":\"-49.7\"},\n        {\"name\":\"N39.7 W149.5\", \"latitude\":\"39.7\", \"longitude\":\"-149.5\"},\n        {\"name\":\"N51.6 E11.1\", \"latitude\":\"51.6\", \"longitude\":\"11.1\"},\n        {\"name\":\"S10.0 E130.0\", \"latitude\":\"-10.0\", \"longitude\":\"130.0\"},\n        {\"name\":\"N69.8 E40.2\", \"latitude\":\"69.8\", \"longitude\":\"40.2\"},\n        {\"name\":\"S70.5 E59.4\", \"latitude\":\"-70.5\", \"longitude\":\"59.4\"},\n        {\"name\":\"N59.7 E160.9\", \"latitude\":\"59.7\", \"longitude\":\"160.9\"},\n        {\"name\":\"N19.3 E130.4\", \"latitude\":\"19.3\", \"longitude\":\"130.4\"},\n        {\"name\":\"S70.2 W51.0\", \"latitude\":\"-70.2\", \"longitude\":\"-51.0\"},\n        {\"name\":\"N1.6 W81.3\", \"latitude\":\"1.6\", \"longitude\":\"-81.3\"},\n        {\"name\":\"S80.7 E39.9\", \"latitude\":\"-80.7\", \"longitude\":\"39.9\"},\n        {\"name\":\"S10.5 E90.5\", \"latitude\":\"-10.5\", \"longitude\":\"90.5\"},\n        {\"name\":\"N8.4 E140.2\", \"latitude\":\"8.4\", \"longitude\":\"140.2\"},\n        {\"name\":\"N70.7 W141.5\", \"latitude\":\"70.7\", \"longitude\":\"-141.5\"},\n        {\"name\":\"S59.7 E120.0\", \"latitude\":\"-59.7\", \"longitude\":\"120.0\"},\n        {\"name\":\"N39.8 W9.6\", \"latitude\":\"39.8\", \"longitude\":\"-9.6\"},\n        {\"name\":\"S49.0 W129.0\", \"latitude\":\"-49.0\", \"longitude\":\"-129.0\"},\n        {\"name\":\"N29.2 E49.2\", \"latitude\":\"29.2\", \"longitude\":\"49.2\"},\n        {\"name\":\"S20.1 E20.8\", \"latitude\":\"-20.1\", \"longitude\":\"20.8\"},\n        {\"name\":\"S21.4 E8.7\", \"latitude\":\"-21.4\", \"longitude\":\"8.7\"},\n        {\"name\":\"S21.3 W169.4\", \"latitude\":\"-21.3\", \"longitude\":\"-169.4\"},\n        {\"name\":\"N29.2 W119.4\", \"latitude\":\"29.2\", \"longitude\":\"-119.4\"},\n        {\"name\":\"N49.7 W8.9\", \"latitude\":\"49.7\", \"longitude\":\"-8.9\"},\n        {\"name\":\"N79.3 W109.6\", \"latitude\":\"79.3\", \"longitude\":\"-109.6\"},\n        {\"name\":\"S59.0 E169.8\", \"latitude\":\"-59.0\", \"longitude\":\"169.8\"},\n        {\"name\":\"S38.9 E140.5\", \"latitude\":\"-38.9\", \"longitude\":\"140.5\"},\n        {\"name\":\"S50.6 W9.1\", \"latitude\":\"-50.6\", \"longitude\":\"-9.1\"},\n        {\"name\":\"S80.5 E161.2\", \"latitude\":\"-80.5\", \"longitude\":\"161.2\"},\n        {\"name\":\"S78.5 E110.9\", \"latitude\":\"-78.5\", \"longitude\":\"110.9\"},\n        {\"name\":\"S60.3 E140.6\", \"latitude\":\"-60.3\", \"longitude\":\"140.6\"},\n        {\"name\":\"S20.2 E89.8\", \"latitude\":\"-20.2\", \"longitude\":\"89.8\"},\n        {\"name\":\"S38.7 E28.5\", \"latitude\":\"-38.7\", \"longitude\":\"28.5\"},\n        {\"name\":\"S58.9 E60.4\", \"latitude\":\"-58.9\", \"longitude\":\"60.4\"},\n        {\"name\":\"N61.3 W38.8\", \"latitude\":\"61.3\", \"longitude\":\"-38.8\"},\n        {\"name\":\"N10.8 E130.7\", \"latitude\":\"10.8\", \"longitude\":\"130.7\"},\n        {\"name\":\"N10.0 W158.6\", \"latitude\":\"10.0\", \"longitude\":\"-158.6\"},\n        {\"name\":\"S79.6 W79.4\", \"latitude\":\"-79.6\", \"longitude\":\"-79.4\"},\n        {\"name\":\"S30.0 W21.3\", \"latitude\":\"-30.0\", \"longitude\":\"-21.3\"},\n        {\"name\":\"N80.5 W171.2\", \"latitude\":\"80.5\", \"longitude\":\"-171.2\"},\n        {\"name\":\"S19.5 E139.0\", \"latitude\":\"-19.5\", \"longitude\":\"139.0\"},\n        {\"name\":\"N50.6 W131.0\", \"latitude\":\"50.6\", \"longitude\":\"-131.0\"},\n        {\"name\":\"N11.5 E170.3\", \"latitude\":\"11.5\", \"longitude\":\"170.3\"},\n        {\"name\":\"N39.9 W79.8\", \"latitude\":\"39.9\", \"longitude\":\"-79.8\"},\n        {\"name\":\"N9.8 E160.6\", \"latitude\":\"9.8\", \"longitude\":\"160.6\"},\n        {\"name\":\"S61.5 W119.9\", \"latitude\":\"-61.5\", \"longitude\":\"-119.9\"},\n        {\"name\":\"S19.7 W21.5\", \"latitude\":\"-19.7\", \"longitude\":\"-21.5\"},\n        {\"name\":\"S70.8 W168.5\", \"latitude\":\"-70.8\", \"longitude\":\"-168.5\"},\n        {\"name\":\"S59.2 E80.5\", \"latitude\":\"-59.2\", \"longitude\":\"80.5\"},\n        {\"name\":\"N78.9 E110.5\", \"latitude\":\"78.9\", \"longitude\":\"110.5\"},\n        {\"name\":\"N28.7 W170.1\", \"latitude\":\"28.7\", \"longitude\":\"-170.1\"},\n        {\"name\":\"S49.7 E20.8\", \"latitude\":\"-49.7\", \"longitude\":\"20.8\"},\n        {\"name\":\"S60.7 E29.2\", \"latitude\":\"-60.7\", \"longitude\":\"29.2\"},\n        {\"name\":\"N78.6 W79.6\", \"latitude\":\"78.6\", \"longitude\":\"-79.6\"},\n        {\"name\":\"S70.3 E120.6\", \"latitude\":\"-70.3\", \"longitude\":\"120.6\"},\n        {\"name\":\"N60.8 W128.8\", \"latitude\":\"60.8\", \"longitude\":\"-128.8\"},\n        {\"name\":\"S40.5 W150.5\", \"latitude\":\"-40.5\", \"longitude\":\"-150.5\"},\n        {\"name\":\"S69.8 E39.1\", \"latitude\":\"-69.8\", \"longitude\":\"39.1\"},\n        {\"name\":\"N60.9 W71.2\", \"latitude\":\"60.9\", \"longitude\":\"-71.2\"},\n        {\"name\":\"N69.2 W161.4\", \"latitude\":\"69.2\", \"longitude\":\"-161.4\"},\n        {\"name\":\"S0.6 E110.5\", \"latitude\":\"-0.6\", \"longitude\":\"110.5\"},\n        {\"name\":\"S29.7 W169.2\", \"latitude\":\"-29.7\", \"longitude\":\"-169.2\"},\n        {\"name\":\"N70.1 E80.1\", \"latitude\":\"70.1\", \"longitude\":\"80.1\"},\n        {\"name\":\"S71.1 W119.8\", \"latitude\":\"-71.1\", \"longitude\":\"-119.8\"},\n        {\"name\":\"N39.5 E150.8\", \"latitude\":\"39.5\", \"longitude\":\"150.8\"},\n        {\"name\":\"N80.4 W121.1\", \"latitude\":\"80.4\", \"longitude\":\"-121.1\"},\n        {\"name\":\"N0.9 E70.6\", \"latitude\":\"0.9\", \"longitude\":\"70.6\"},\n        {\"name\":\"S11.3 W0.8\", \"latitude\":\"-11.3\", \"longitude\":\"-0.8\"},\n        {\"name\":\"S79.5 E11.3\", \"latitude\":\"-79.5\", \"longitude\":\"11.3\"},\n        {\"name\":\"S29.9 E89.2\", \"latitude\":\"-29.9\", \"longitude\":\"89.2\"},\n        {\"name\":\"S81.3 E79.6\", \"latitude\":\"-81.3\", \"longitude\":\"79.6\"},\n        {\"name\":\"N70.4 E1.3\", \"latitude\":\"70.4\", \"longitude\":\"1.3\"},\n        {\"name\":\"S51.2 E50.9\", \"latitude\":\"-51.2\", \"longitude\":\"50.9\"},\n        {\"name\":\"S40.6 W21.6\", \"latitude\":\"-40.6\", \"longitude\":\"-21.6\"},\n        {\"name\":\"S39.6 E59.0\", \"latitude\":\"-39.6\", \"longitude\":\"59.0\"},\n        {\"name\":\"N0.2 W11.3\", \"latitude\":\"0.2\", \"longitude\":\"-11.3\"},\n        {\"name\":\"N19.7 E71.3\", \"latitude\":\"19.7\", \"longitude\":\"71.3\"},\n        {\"name\":\"S29.9 E140.7\", \"latitude\":\"-29.9\", \"longitude\":\"140.7\"},\n        {\"name\":\"N21.5 E10.2\", \"latitude\":\"21.5\", \"longitude\":\"10.2\"},\n        {\"name\":\"S51.2 E118.8\", \"latitude\":\"-51.2\", \"longitude\":\"118.8\"},\n        {\"name\":\"N29.5 W19.4\", \"latitude\":\"29.5\", \"longitude\":\"-19.4\"},\n        {\"name\":\"S69.4 W158.8\", \"latitude\":\"-69.4\", \"longitude\":\"-158.8\"},\n        {\"name\":\"N29.8 W69.6\", \"latitude\":\"29.8\", \"longitude\":\"-69.6\"},\n        {\"name\":\"S30.2 W49.5\", \"latitude\":\"-30.2\", \"longitude\":\"-49.5\"},\n        {\"name\":\"S80.7 W10.6\", \"latitude\":\"-80.7\", \"longitude\":\"-10.6\"},\n        {\"name\":\"N79.0 E11.4\", \"latitude\":\"79.0\", \"longitude\":\"11.4\"},\n        {\"name\":\"N60.5 E79.9\", \"latitude\":\"60.5\", \"longitude\":\"79.9\"},\n        {\"name\":\"N0.2 W30.9\", \"latitude\":\"0.2\", \"longitude\":\"-30.9\"},\n        {\"name\":\"N78.9 E88.7\", \"latitude\":\"78.9\", \"longitude\":\"88.7\"},\n        {\"name\":\"S8.8 W51.3\", \"latitude\":\"-8.8\", \"longitude\":\"-51.3\"},\n        {\"name\":\"S31.1 W81.0\", \"latitude\":\"-31.1\", \"longitude\":\"-81.0\"},\n        {\"name\":\"S40.4 E120.7\", \"latitude\":\"-40.4\", \"longitude\":\"120.7\"},\n        {\"name\":\"S29.1 W120.3\", \"latitude\":\"-29.1\", \"longitude\":\"-120.3\"},\n        {\"name\":\"N31.5 W128.4\", \"latitude\":\"31.5\", \"longitude\":\"-128.4\"},\n        {\"name\":\"S49.6 W160.7\", \"latitude\":\"-49.6\", \"longitude\":\"-160.7\"},\n        {\"name\":\"N79.7 E41.0\", \"latitude\":\"79.7\", \"longitude\":\"41.0\"},\n        {\"name\":\"S0.8 W98.8\", \"latitude\":\"-0.8\", \"longitude\":\"-98.8\"},\n        {\"name\":\"S20.1 W150.5\", \"latitude\":\"-20.1\", \"longitude\":\"-150.5\"},\n        {\"name\":\"S8.6 E8.6\", \"latitude\":\"-8.6\", \"longitude\":\"8.6\"},\n        {\"name\":\"N0.8 W129.5\", \"latitude\":\"0.8\", \"longitude\":\"-129.5\"},\n        {\"name\":\"N10.4 E49.8\", \"latitude\":\"10.4\", \"longitude\":\"49.8\"},\n        {\"name\":\"N49.9 W28.9\", \"latitude\":\"49.9\", \"longitude\":\"-28.9\"},\n        {\"name\":\"N58.6 E101.5\", \"latitude\":\"58.6\", \"longitude\":\"101.5\"},\n        {\"name\":\"N20.9 W30.3\", \"latitude\":\"20.9\", \"longitude\":\"-30.3\"},\n        {\"name\":\"N68.7 E120.8\", \"latitude\":\"68.7\", \"longitude\":\"120.8\"},\n        {\"name\":\"N31.3 W90.1\", \"latitude\":\"31.3\", \"longitude\":\"-90.1\"},\n        {\"name\":\"N69.7 E29.4\", \"latitude\":\"69.7\", \"longitude\":\"29.4\"},\n        {\"name\":\"S50.9 E60.9\", \"latitude\":\"-50.9\", \"longitude\":\"60.9\"},\n        {\"name\":\"S79.8 W100.1\", \"latitude\":\"-79.8\", \"longitude\":\"-100.1\"},\n        {\"name\":\"S20.5 E51.1\", \"latitude\":\"-20.5\", \"longitude\":\"51.1\"},\n        {\"name\":\"N68.8 E49.3\", \"latitude\":\"68.8\", \"longitude\":\"49.3\"},\n        {\"name\":\"S49.7 E110.5\", \"latitude\":\"-49.7\", \"longitude\":\"110.5\"},\n        {\"name\":\"S51.2 W170.3\", \"latitude\":\"-51.2\", \"longitude\":\"-170.3\"},\n        {\"name\":\"S70.5 E1.1\", \"latitude\":\"-70.5\", \"longitude\":\"1.1\"},\n        {\"name\":\"N51.0 E120.8\", \"latitude\":\"51.0\", \"longitude\":\"120.8\"},\n        {\"name\":\"S9.4 W139.2\", \"latitude\":\"-9.4\", \"longitude\":\"-139.2\"},\n        {\"name\":\"N39.2 W88.8\", \"latitude\":\"39.2\", \"longitude\":\"-88.8\"},\n        {\"name\":\"N51.3 W120.0\", \"latitude\":\"51.3\", \"longitude\":\"-120.0\"},\n        {\"name\":\"N81.5 W128.4\", \"latitude\":\"81.5\", \"longitude\":\"-128.4\"},\n        {\"name\":\"S50.2 W1.2\", \"latitude\":\"-50.2\", \"longitude\":\"-1.2\"},\n        {\"name\":\"S0.7 W39.1\", \"latitude\":\"-0.7\", \"longitude\":\"-39.1\"},\n        {\"name\":\"N49.9 E38.5\", \"latitude\":\"49.9\", \"longitude\":\"38.5\"},\n        {\"name\":\"S69.0 W81.5\", \"latitude\":\"-69.0\", \"longitude\":\"-81.5\"},\n        {\"name\":\"S79.1 W59.6\", \"latitude\":\"-79.1\", \"longitude\":\"-59.6\"},\n        {\"name\":\"N48.6 E139.0\", \"latitude\":\"48.6\", \"longitude\":\"139.0\"},\n        {\"name\":\"S9.2 E81.5\", \"latitude\":\"-9.2\", \"longitude\":\"81.5\"},\n        {\"name\":\"N29.3 E128.6\", \"latitude\":\"29.3\", \"longitude\":\"128.6\"},\n        {\"name\":\"S9.9 E160.4\", \"latitude\":\"-9.9\", \"longitude\":\"160.4\"},\n        {\"name\":\"N49.6 E130.2\", \"latitude\":\"49.6\", \"longitude\":\"130.2\"},\n        {\"name\":\"N10.9 W1.4\", \"latitude\":\"10.9\", \"longitude\":\"-1.4\"},\n        {\"name\":\"S78.5 E168.8\", \"latitude\":\"-78.5\", \"longitude\":\"168.8\"},\n        {\"name\":\"S71.3 W71.3\", \"latitude\":\"-71.3\", \"longitude\":\"-71.3\"},\n        {\"name\":\"S29.5 W28.8\", \"latitude\":\"-29.5\", \"longitude\":\"-28.8\"},\n        {\"name\":\"S39.9 W119.1\", \"latitude\":\"-39.9\", \"longitude\":\"-119.1\"},\n        {\"name\":\"S10.0 E99.3\", \"latitude\":\"-10.0\", \"longitude\":\"99.3\"},\n        {\"name\":\"N61.1 W110.5\", \"latitude\":\"61.1\", \"longitude\":\"-110.5\"},\n        {\"name\":\"N39.7 E159.5\", \"latitude\":\"39.7\", \"longitude\":\"159.5\"},\n        {\"name\":\"N39.3 W39.1\", \"latitude\":\"39.3\", \"longitude\":\"-39.1\"},\n        {\"name\":\"S29.3 E150.7\", \"latitude\":\"-29.3\", \"longitude\":\"150.7\"},\n        {\"name\":\"S59.1 W150.3\", \"latitude\":\"-59.1\", \"longitude\":\"-150.3\"},\n        {\"name\":\"S38.8 E110.6\", \"latitude\":\"-38.8\", \"longitude\":\"110.6\"},\n        {\"name\":\"S29.9 E120.6\", \"latitude\":\"-29.9\", \"longitude\":\"120.6\"},\n        {\"name\":\"N61.1 E10.3\", \"latitude\":\"61.1\", \"longitude\":\"10.3\"},\n        {\"name\":\"N8.5 W30.3\", \"latitude\":\"8.5\", \"longitude\":\"-30.3\"},\n        {\"name\":\"S39.6 E38.5\", \"latitude\":\"-39.6\", \"longitude\":\"38.5\"},\n        {\"name\":\"S0.8 W110.8\", \"latitude\":\"-0.8\", \"longitude\":\"-110.8\"},\n        {\"name\":\"S48.4 E128.7\", \"latitude\":\"-48.4\", \"longitude\":\"128.7\"},\n        {\"name\":\"S81.2 E120.6\", \"latitude\":\"-81.2\", \"longitude\":\"120.6\"},\n        {\"name\":\"S69.8 W151.2\", \"latitude\":\"-69.8\", \"longitude\":\"-151.2\"},\n        {\"name\":\"N59.3 W10.6\", \"latitude\":\"59.3\", \"longitude\":\"-10.6\"},\n        {\"name\":\"S48.8 W48.8\", \"latitude\":\"-48.8\", \"longitude\":\"-48.8\"},\n        {\"name\":\"S81.1 E49.4\", \"latitude\":\"-81.1\", \"longitude\":\"49.4\"},\n        {\"name\":\"S0.2 E128.8\", \"latitude\":\"-0.2\", \"longitude\":\"128.8\"},\n        {\"name\":\"S10.5 E29.9\", \"latitude\":\"-10.5\", \"longitude\":\"29.9\"},\n        {\"name\":\"N51.5 E110.2\", \"latitude\":\"51.5\", \"longitude\":\"110.2\"},\n        {\"name\":\"N79.8 E31.1\", \"latitude\":\"79.8\", \"longitude\":\"31.1\"},\n        {\"name\":\"N30.5 E1.6\", \"latitude\":\"30.5\", \"longitude\":\"1.6\"},\n        {\"name\":\"N69.4 E70.1\", \"latitude\":\"69.4\", \"longitude\":\"70.1\"},\n        {\"name\":\"S0.5 E90.7\", \"latitude\":\"-0.5\", \"longitude\":\"90.7\"},\n        {\"name\":\"N80.9 E161.5\", \"latitude\":\"80.9\", \"longitude\":\"161.5\"},\n        {\"name\":\"N1.1 W59.0\", \"latitude\":\"1.1\", \"longitude\":\"-59.0\"},\n        {\"name\":\"S49.7 W91.3\", \"latitude\":\"-49.7\", \"longitude\":\"-91.3\"},\n        {\"name\":\"N60.6 E118.8\", \"latitude\":\"60.6\", \"longitude\":\"118.8\"},\n        {\"name\":\"N70.0 E20.7\", \"latitude\":\"70.0\", \"longitude\":\"20.7\"},\n        {\"name\":\"S79.6 W29.2\", \"latitude\":\"-79.6\", \"longitude\":\"-29.2\"},\n        {\"name\":\"N29.6 W151.4\", \"latitude\":\"29.6\", \"longitude\":\"-151.4\"},\n        {\"name\":\"N31.1 W29.5\", \"latitude\":\"31.1\", \"longitude\":\"-29.5\"},\n        {\"name\":\"S49.2 E38.6\", \"latitude\":\"-49.2\", \"longitude\":\"38.6\"},\n        {\"name\":\"S10.5 W118.5\", \"latitude\":\"-10.5\", \"longitude\":\"-118.5\"},\n        {\"name\":\"S71.4 E159.6\", \"latitude\":\"-71.4\", \"longitude\":\"159.6\"},\n        {\"name\":\"S41.6 W109.2\", \"latitude\":\"-41.6\", \"longitude\":\"-109.2\"},\n        {\"name\":\"N20.8 W48.5\", \"latitude\":\"20.8\", \"longitude\":\"-48.5\"},\n        {\"name\":\"S61.2 W79.6\", \"latitude\":\"-61.2\", \"longitude\":\"-79.6\"},\n        {\"name\":\"N0.2 E121.1\", \"latitude\":\"0.2\", \"longitude\":\"121.1\"},\n        {\"name\":\"S50.2 W110.6\", \"latitude\":\"-50.2\", \"longitude\":\"-110.6\"},\n        {\"name\":\"S20.1 W99.2\", \"latitude\":\"-20.1\", \"longitude\":\"-99.2\"},\n        {\"name\":\"S18.8 E128.5\", \"latitude\":\"-18.8\", \"longitude\":\"128.5\"},\n        {\"name\":\"S11.4 W71.2\", \"latitude\":\"-11.4\", \"longitude\":\"-71.2\"},\n        {\"name\":\"N1.5 E170.2\", \"latitude\":\"1.5\", \"longitude\":\"170.2\"},\n        {\"name\":\"N49.4 W100.9\", \"latitude\":\"49.4\", \"longitude\":\"-100.9\"},\n        {\"name\":\"N48.8 E18.9\", \"latitude\":\"48.8\", \"longitude\":\"18.9\"},\n        {\"name\":\"S29.5 E160.4\", \"latitude\":\"-29.5\", \"longitude\":\"160.4\"},\n        {\"name\":\"N20.4 W88.5\", \"latitude\":\"20.4\", \"longitude\":\"-88.5\"},\n        {\"name\":\"N0.8 E99.7\", \"latitude\":\"0.8\", \"longitude\":\"99.7\"},\n        {\"name\":\"N8.7 W80.3\", \"latitude\":\"8.7\", \"longitude\":\"-80.3\"},\n        {\"name\":\"N78.8 W149.3\", \"latitude\":\"78.8\", \"longitude\":\"-149.3\"},\n        {\"name\":\"N71.0 E150.1\", \"latitude\":\"71.0\", \"longitude\":\"150.1\"},\n        {\"name\":\"S41.0 E149.8\", \"latitude\":\"-41.0\", \"longitude\":\"149.8\"},\n        {\"name\":\"N28.8 E150.1\", \"latitude\":\"28.8\", \"longitude\":\"150.1\"},\n        {\"name\":\"S9.5 E108.9\", \"latitude\":\"-9.5\", \"longitude\":\"108.9\"},\n        {\"name\":\"N49.9 E79.0\", \"latitude\":\"49.9\", \"longitude\":\"79.0\"},\n        {\"name\":\"N58.8 E50.2\", \"latitude\":\"58.8\", \"longitude\":\"50.2\"},\n        {\"name\":\"S68.8 E101.2\", \"latitude\":\"-68.8\", \"longitude\":\"101.2\"},\n        {\"name\":\"S29.3 W148.6\", \"latitude\":\"-29.3\", \"longitude\":\"-148.6\"},\n        {\"name\":\"S29.3 E31.4\", \"latitude\":\"-29.3\", \"longitude\":\"31.4\"},\n        {\"name\":\"N50.1 E149.3\", \"latitude\":\"50.1\", \"longitude\":\"149.3\"},\n        {\"name\":\"N28.8 E100.4\", \"latitude\":\"28.8\", \"longitude\":\"100.4\"},\n        {\"name\":\"N58.7 E71.1\", \"latitude\":\"58.7\", \"longitude\":\"71.1\"},\n        {\"name\":\"S49.8 W101.4\", \"latitude\":\"-49.8\", \"longitude\":\"-101.4\"},\n        {\"name\":\"N69.6 W119.6\", \"latitude\":\"69.6\", \"longitude\":\"-119.6\"},\n        {\"name\":\"S8.9 E70.1\", \"latitude\":\"-8.9\", \"longitude\":\"70.1\"},\n        {\"name\":\"S10.3 W89.6\", \"latitude\":\"-10.3\", \"longitude\":\"-89.6\"},\n        {\"name\":\"S80.7 E141.2\", \"latitude\":\"-80.7\", \"longitude\":\"141.2\"},\n        {\"name\":\"N11.1 E30.2\", \"latitude\":\"11.1\", \"longitude\":\"30.2\"},\n        {\"name\":\"S10.2 E60.1\", \"latitude\":\"-10.2\", \"longitude\":\"60.1\"},\n        {\"name\":\"S31.6 W99.6\", \"latitude\":\"-31.6\", \"longitude\":\"-99.6\"},\n        {\"name\":\"N71.4 W170.2\", \"latitude\":\"71.4\", \"longitude\":\"-170.2\"},\n        {\"name\":\"N1.2 E30.4\", \"latitude\":\"1.2\", \"longitude\":\"30.4\"},\n        {\"name\":\"S30.3 W58.7\", \"latitude\":\"-30.3\", \"longitude\":\"-58.7\"},\n        {\"name\":\"N0.3 E159.9\", \"latitude\":\"0.3\", \"longitude\":\"159.9\"},\n        {\"name\":\"S58.9 E159.5\", \"latitude\":\"-58.9\", \"longitude\":\"159.5\"},\n        {\"name\":\"N19.2 W58.4\", \"latitude\":\"19.2\", \"longitude\":\"-58.4\"},\n        {\"name\":\"S39.7 W70.7\", \"latitude\":\"-39.7\", \"longitude\":\"-70.7\"},\n        {\"name\":\"S20.0 W159.7\", \"latitude\":\"-20.0\", \"longitude\":\"-159.7\"},\n        {\"name\":\"N30.1 W98.8\", \"latitude\":\"30.1\", \"longitude\":\"-98.8\"},\n        {\"name\":\"S19.5 E29.8\", \"latitude\":\"-19.5\", \"longitude\":\"29.8\"},\n        {\"name\":\"S60.2 E39.4\", \"latitude\":\"-60.2\", \"longitude\":\"39.4\"},\n        {\"name\":\"N9.2 E110.6\", \"latitude\":\"9.2\", \"longitude\":\"110.6\"},\n        {\"name\":\"N1.2 E150.3\", \"latitude\":\"1.2\", \"longitude\":\"150.3\"},\n        {\"name\":\"N40.1 W120.2\", \"latitude\":\"40.1\", \"longitude\":\"-120.2\"},\n        {\"name\":\"S38.7 E171.0\", \"latitude\":\"-38.7\", \"longitude\":\"171.0\"},\n        {\"name\":\"S68.9 E169.5\", \"latitude\":\"-68.9\", \"longitude\":\"169.5\"},\n        {\"name\":\"S31.5 E59.9\", \"latitude\":\"-31.5\", \"longitude\":\"59.9\"},\n        {\"name\":\"S79.6 W140.9\", \"latitude\":\"-79.6\", \"longitude\":\"-140.9\"},\n        {\"name\":\"S80.6 W169.4\", \"latitude\":\"-80.6\", \"longitude\":\"-169.4\"},\n        {\"name\":\"N50.3 W160.9\", \"latitude\":\"50.3\", \"longitude\":\"-160.9\"},\n        {\"name\":\"N58.7 E140.4\", \"latitude\":\"58.7\", \"longitude\":\"140.4\"},\n        {\"name\":\"N19.6 W159.8\", \"latitude\":\"19.6\", \"longitude\":\"-159.8\"},\n        {\"name\":\"S18.7 E69.2\", \"latitude\":\"-18.7\", \"longitude\":\"69.2\"},\n        {\"name\":\"N41.4 E68.6\", \"latitude\":\"41.4\", \"longitude\":\"68.6\"},\n        {\"name\":\"N40.1 W141.0\", \"latitude\":\"40.1\", \"longitude\":\"-141.0\"},\n        {\"name\":\"S50.0 E80.8\", \"latitude\":\"-50.0\", \"longitude\":\"80.8\"},\n        {\"name\":\"N19.6 E160.1\", \"latitude\":\"19.6\", \"longitude\":\"160.1\"},\n        {\"name\":\"N21.2 W100.2\", \"latitude\":\"21.2\", \"longitude\":\"-100.2\"},\n        {\"name\":\"N58.8 E0.4\", \"latitude\":\"58.8\", \"longitude\":\"0.4\"},\n        {\"name\":\"S71.3 W98.7\", \"latitude\":\"-71.3\", \"longitude\":\"-98.7\"},\n        {\"name\":\"S69.0 W58.7\", \"latitude\":\"-69.0\", \"longitude\":\"-58.7\"},\n        {\"name\":\"N29.0 E121.3\", \"latitude\":\"29.0\", \"longitude\":\"121.3\"},\n        {\"name\":\"S71.6 W30.1\", \"latitude\":\"-71.6\", \"longitude\":\"-30.1\"},\n        {\"name\":\"N69.0 W31.4\", \"latitude\":\"69.0\", \"longitude\":\"-31.4\"},\n        {\"name\":\"N41.5 E90.9\", \"latitude\":\"41.5\", \"longitude\":\"90.9\"},\n        {\"name\":\"N11.1 W150.7\", \"latitude\":\"11.1\", \"longitude\":\"-150.7\"},\n        {\"name\":\"S41.4 E128.9\", \"latitude\":\"-41.4\", \"longitude\":\"128.9\"},\n        {\"name\":\"N61.2 W19.8\", \"latitude\":\"61.2\", \"longitude\":\"-19.8\"},\n        {\"name\":\"N71.0 W151.1\", \"latitude\":\"71.0\", \"longitude\":\"-151.1\"},\n        {\"name\":\"S31.5 E109.1\", \"latitude\":\"-31.5\", \"longitude\":\"109.1\"},\n        {\"name\":\"S80.6 E100.2\", \"latitude\":\"-80.6\", \"longitude\":\"100.2\"},\n        {\"name\":\"N20.1 E59.3\", \"latitude\":\"20.1\", \"longitude\":\"59.3\"},\n        {\"name\":\"S40.8 E50.7\", \"latitude\":\"-40.8\", \"longitude\":\"50.7\"},\n        {\"name\":\"N20.5 E90.2\", \"latitude\":\"20.5\", \"longitude\":\"90.2\"},\n        {\"name\":\"S1.2 E50.6\", \"latitude\":\"-1.2\", \"longitude\":\"50.6\"},\n        {\"name\":\"S58.7 E111.5\", \"latitude\":\"-58.7\", \"longitude\":\"111.5\"},\n        {\"name\":\"N11.5 W68.6\", \"latitude\":\"11.5\", \"longitude\":\"-68.6\"},\n        {\"name\":\"N79.6 W58.4\", \"latitude\":\"79.6\", \"longitude\":\"-58.4\"},\n        {\"name\":\"S70.9 E20.8\", \"latitude\":\"-70.9\", \"longitude\":\"20.8\"},\n        {\"name\":\"S40.9 W0.8\", \"latitude\":\"-40.9\", \"longitude\":\"-0.8\"},\n        {\"name\":\"N11.3 W20.8\", \"latitude\":\"11.3\", \"longitude\":\"-20.8\"},\n        {\"name\":\"N10.3 W50.2\", \"latitude\":\"10.3\", \"longitude\":\"-50.2\"},\n        {\"name\":\"S30.1 E101.2\", \"latitude\":\"-30.1\", \"longitude\":\"101.2\"},\n        {\"name\":\"N78.4 E131.0\", \"latitude\":\"78.4\", \"longitude\":\"131.0\"},\n        {\"name\":\"S8.7 W28.8\", \"latitude\":\"-8.7\", \"longitude\":\"-28.8\"},\n        {\"name\":\"S78.9 W148.5\", \"latitude\":\"-78.9\", \"longitude\":\"-148.5\"},\n        {\"name\":\"N70.1 W68.8\", \"latitude\":\"70.1\", \"longitude\":\"-68.8\"},\n        {\"name\":\"S61.0 W48.6\", \"latitude\":\"-61.0\", \"longitude\":\"-48.6\"},\n        {\"name\":\"S58.8 W139.9\", \"latitude\":\"-58.8\", \"longitude\":\"-139.9\"},\n        {\"name\":\"N18.5 W70.3\", \"latitude\":\"18.5\", \"longitude\":\"-70.3\"},\n        {\"name\":\"N58.7 W159.7\", \"latitude\":\"58.7\", \"longitude\":\"-159.7\"},\n        {\"name\":\"S79.2 W129.6\", \"latitude\":\"-79.2\", \"longitude\":\"-129.6\"},\n        {\"name\":\"S58.5 E150.4\", \"latitude\":\"-58.5\", \"longitude\":\"150.4\"},\n        {\"name\":\"N41.3 W100.5\", \"latitude\":\"41.3\", \"longitude\":\"-100.5\"},\n        {\"name\":\"S29.1 W11.1\", \"latitude\":\"-29.1\", \"longitude\":\"-11.1\"},\n        {\"name\":\"N80.3 W1.4\", \"latitude\":\"80.3\", \"longitude\":\"-1.4\"},\n        {\"name\":\"N70.6 W59.2\", \"latitude\":\"70.6\", \"longitude\":\"-59.2\"},\n        {\"name\":\"S60.2 E68.9\", \"latitude\":\"-60.2\", \"longitude\":\"68.9\"},\n        {\"name\":\"S40.3 E79.9\", \"latitude\":\"-40.3\", \"longitude\":\"79.9\"},\n        {\"name\":\"S80.6 E59.1\", \"latitude\":\"-80.6\", \"longitude\":\"59.1\"},\n        {\"name\":\"S20.0 W59.9\", \"latitude\":\"-20.0\", \"longitude\":\"-59.9\"},\n        {\"name\":\"S39.1 E89.7\", \"latitude\":\"-39.1\", \"longitude\":\"89.7\"},\n        {\"name\":\"S60.2 W60.6\", \"latitude\":\"-60.2\", \"longitude\":\"-60.6\"},\n        {\"name\":\"S51.0 E169.1\", \"latitude\":\"-51.0\", \"longitude\":\"169.1\"},\n        {\"name\":\"N80.2 E51.4\", \"latitude\":\"80.2\", \"longitude\":\"51.4\"},\n        {\"name\":\"S59.9 E131.5\", \"latitude\":\"-59.9\", \"longitude\":\"131.5\"},\n        {\"name\":\"N70.0 E169.9\", \"latitude\":\"70.0\", \"longitude\":\"169.9\"},\n        {\"name\":\"N0.6 E60.9\", \"latitude\":\"0.6\", \"longitude\":\"60.9\"},\n        {\"name\":\"N69.8 W80.1\", \"latitude\":\"69.8\", \"longitude\":\"-80.1\"},\n        {\"name\":\"N50.6 W58.8\", \"latitude\":\"50.6\", \"longitude\":\"-58.8\"},\n        {\"name\":\"N21.4 W120.5\", \"latitude\":\"21.4\", \"longitude\":\"-120.5\"},\n        {\"name\":\"S60.2 E91.4\", \"latitude\":\"-60.2\", \"longitude\":\"91.4\"},\n        {\"name\":\"N79.8 W91.1\", \"latitude\":\"79.8\", \"longitude\":\"-91.1\"},\n        {\"name\":\"S1.4 E8.5\", \"latitude\":\"-1.4\", \"longitude\":\"8.5\"},\n        {\"name\":\"N21.0 W78.8\", \"latitude\":\"21.0\", \"longitude\":\"-78.8\"},\n        {\"name\":\"N50.0 W138.7\", \"latitude\":\"50.0\", \"longitude\":\"-138.7\"},\n        {\"name\":\"N80.8 W139.2\", \"latitude\":\"80.8\", \"longitude\":\"-139.2\"},\n        {\"name\":\" 0.0 W48.8\", \"latitude\":\"-0.0\", \"longitude\":\"-48.8\"},\n        {\"name\":\"N30.1 W40.8\", \"latitude\":\"30.1\", \"longitude\":\"-40.8\"},\n        {\"name\":\"N0.1 E20.8\", \"latitude\":\"0.1\", \"longitude\":\"20.8\"},\n        {\"name\":\"N50.2 E60.1\", \"latitude\":\"50.2\", \"longitude\":\"60.1\"},\n        {\"name\":\"N11.2 E148.5\", \"latitude\":\"11.2\", \"longitude\":\"148.5\"},\n        {\"name\":\"S50.6 E90.9\", \"latitude\":\"-50.6\", \"longitude\":\"90.9\"},\n        {\"name\":\"N10.7 W39.3\", \"latitude\":\"10.7\", \"longitude\":\"-39.3\"},\n        {\"name\":\"S81.3 E19.1\", \"latitude\":\"-81.3\", \"longitude\":\"19.1\"},\n        {\"name\":\"N39.9 E60.6\", \"latitude\":\"39.9\", \"longitude\":\"60.6\"},\n        {\"name\":\"S80.0 W0.1\", \"latitude\":\"-80.0\", \"longitude\":\"-0.1\"},\n        {\"name\":\"N18.9 W128.7\", \"latitude\":\"18.9\", \"longitude\":\"-128.7\"},\n        {\"name\":\"S78.4 W21.1\", \"latitude\":\"-78.4\", \"longitude\":\"-21.1\"},\n        {\"name\":\"S48.7 E149.9\", \"latitude\":\"-48.7\", \"longitude\":\"149.9\"},\n        {\"name\":\"N39.7 E31.2\", \"latitude\":\"39.7\", \"longitude\":\"31.2\"},\n        {\"name\":\"N21.5 E140.1\", \"latitude\":\"21.5\", \"longitude\":\"140.1\"},\n        {\"name\":\"S30.9 E39.9\", \"latitude\":\"-30.9\", \"longitude\":\"39.9\"},\n        {\"name\":\"S8.7 W170.9\", \"latitude\":\"-8.7\", \"longitude\":\"-170.9\"},\n        {\"name\":\"S30.7 W71.1\", \"latitude\":\"-30.7\", \"longitude\":\"-71.1\"},\n        {\"name\":\"N49.3 W1.2\", \"latitude\":\"49.3\", \"longitude\":\"-1.2\"},\n        {\"name\":\"N49.6 W150.2\", \"latitude\":\"49.6\", \"longitude\":\"-150.2\"},\n        {\"name\":\"N49.7 E170.6\", \"latitude\":\"49.7\", \"longitude\":\"170.6\"},\n        {\"name\":\"N29.8 E8.9\", \"latitude\":\"29.8\", \"longitude\":\"8.9\"},\n        {\"name\":\"S40.8 W58.5\", \"latitude\":\"-40.8\", \"longitude\":\"-58.5\"},\n        {\"name\":\"S50.9 E11.2\", \"latitude\":\"-50.9\", \"longitude\":\"11.2\"},\n        {\"name\":\"N50.8 W91.1\", \"latitude\":\"50.8\", \"longitude\":\"-91.1\"},\n        {\"name\":\"S60.2 W69.1\", \"latitude\":\"-60.2\", \"longitude\":\"-69.1\"},\n        {\"name\":\"N19.4 W139.9\", \"latitude\":\"19.4\", \"longitude\":\"-139.9\"},\n        {\"name\":\"S50.1 W28.7\", \"latitude\":\"-50.1\", \"longitude\":\"-28.7\"},\n        {\"name\":\"N69.8 E140.0\", \"latitude\":\"69.8\", \"longitude\":\"140.0\"},\n        {\"name\":\"S0.3 W118.5\", \"latitude\":\"-0.3\", \"longitude\":\"-118.5\"},\n        {\"name\":\"S1.1 E0.2\", \"latitude\":\"-1.1\", \"longitude\":\"0.2\"},\n        {\"name\":\"S69.9 E70.0\", \"latitude\":\"-69.9\", \"longitude\":\"70.0\"},\n        {\"name\":\"S49.5 W120.0\", \"latitude\":\"-49.5\", \"longitude\":\"-120.0\"},\n        {\"name\":\"N50.8 W81.5\", \"latitude\":\"50.8\", \"longitude\":\"-81.5\"},\n        {\"name\":\"S10.8 E39.1\", \"latitude\":\"-10.8\", \"longitude\":\"39.1\"},\n        {\"name\":\"S10.0 W130.3\", \"latitude\":\"-10.0\", \"longitude\":\"-130.3\"},\n        {\"name\":\"S19.6 W50.9\", \"latitude\":\"-19.6\", \"longitude\":\"-50.9\"},\n        {\"name\":\"S39.4 E98.5\", \"latitude\":\"-39.4\", \"longitude\":\"98.5\"},\n        {\"name\":\"N19.4 E100.9\", \"latitude\":\"19.4\", \"longitude\":\"100.9\"},\n        {\"name\":\"S59.3 W31.0\", \"latitude\":\"-59.3\", \"longitude\":\"-31.0\"},\n        {\"name\":\"N80.1 E168.5\", \"latitude\":\"80.1\", \"longitude\":\"168.5\"},\n        {\"name\":\"N11.5 E71.5\", \"latitude\":\"11.5\", \"longitude\":\"71.5\"},\n        {\"name\":\"N48.5 E28.6\", \"latitude\":\"48.5\", \"longitude\":\"28.6\"},\n        {\"name\":\"N81.4 W71.5\", \"latitude\":\"81.4\", \"longitude\":\"-71.5\"},\n        {\"name\":\"S31.1 E130.5\", \"latitude\":\"-31.1\", \"longitude\":\"130.5\"},\n        {\"name\":\"N31.0 W78.8\", \"latitude\":\"31.0\", \"longitude\":\"-78.8\"},\n        {\"name\":\"N38.9 W160.1\", \"latitude\":\"38.9\", \"longitude\":\"-160.1\"},\n        {\"name\":\"N41.4 E81.4\", \"latitude\":\"41.4\", \"longitude\":\"81.4\"},\n        {\"name\":\"N40.9 E101.2\", \"latitude\":\"40.9\", \"longitude\":\"101.2\"},\n        {\"name\":\"S60.1 W90.2\", \"latitude\":\"-60.1\", \"longitude\":\"-90.2\"},\n        {\"name\":\"N29.5 W158.6\", \"latitude\":\"29.5\", \"longitude\":\"-158.6\"},\n        {\"name\":\"S59.4 W1.4\", \"latitude\":\"-59.4\", \"longitude\":\"-1.4\"},\n        {\"name\":\"S31.1 E71.1\", \"latitude\":\"-31.1\", \"longitude\":\"71.1\"},\n        {\"name\":\"N1.4 W158.5\", \"latitude\":\"1.4\", \"longitude\":\"-158.5\"},\n        {\"name\":\"N31.5 E159.8\", \"latitude\":\"31.5\", \"longitude\":\"159.8\"},\n        {\"name\":\"N0.6 W171.6\", \"latitude\":\"0.6\", \"longitude\":\"-171.6\"},\n        {\"name\":\"N11.2 E38.4\", \"latitude\":\"11.2\", \"longitude\":\"38.4\"},\n        {\"name\":\"N61.5 E59.8\", \"latitude\":\"61.5\", \"longitude\":\"59.8\"},\n        {\"name\":\"S80.3 W119.8\", \"latitude\":\"-80.3\", \"longitude\":\"-119.8\"},\n        {\"name\":\"N0.3 W148.6\", \"latitude\":\"0.3\", \"longitude\":\"-148.6\"},\n        {\"name\":\"S40.0 E158.6\", \"latitude\":\"-40.0\", \"longitude\":\"158.6\"},\n        {\"name\":\"N30.8 W110.5\", \"latitude\":\"30.8\", \"longitude\":\"-110.5\"},\n        {\"name\":\"N79.1 W49.2\", \"latitude\":\"79.1\", \"longitude\":\"-49.2\"},\n        {\"name\":\"N29.5 E88.6\", \"latitude\":\"29.5\", \"longitude\":\"88.6\"},\n        {\"name\":\"S81.3 W41.5\", \"latitude\":\"-81.3\", \"longitude\":\"-41.5\"},\n        {\"name\":\"S70.5 E28.6\", \"latitude\":\"-70.5\", \"longitude\":\"28.6\"},\n        {\"name\":\"S19.6 W121.3\", \"latitude\":\"-19.6\", \"longitude\":\"-121.3\"},\n        {\"name\":\"N29.6 E110.7\", \"latitude\":\"29.6\", \"longitude\":\"110.7\"},\n        {\"name\":\"S39.9 W41.2\", \"latitude\":\"-39.9\", \"longitude\":\"-41.2\"},\n        {\"name\":\"S40.3 W140.0\", \"latitude\":\"-40.3\", \"longitude\":\"-140.0\"},\n        {\"name\":\"N59.1 E30.1\", \"latitude\":\"59.1\", \"longitude\":\"30.1\"},\n        {\"name\":\"S69.4 E11.4\", \"latitude\":\"-69.4\", \"longitude\":\"11.4\"},\n        {\"name\":\"S18.9 W109.5\", \"latitude\":\"-18.9\", \"longitude\":\"-109.5\"},\n        {\"name\":\"S69.8 E140.5\", \"latitude\":\"-69.8\", \"longitude\":\"140.5\"},\n        {\"name\":\"S9.3 E138.8\", \"latitude\":\"-9.3\", \"longitude\":\"138.8\"},\n        {\"name\":\"N20.2 W40.1\", \"latitude\":\"20.2\", \"longitude\":\"-40.1\"},\n        {\"name\":\"S80.2 E69.5\", \"latitude\":\"-80.2\", \"longitude\":\"69.5\"},\n        {\"name\":\"S9.6 W41.0\", \"latitude\":\"-9.6\", \"longitude\":\"-41.0\"},\n        {\"name\":\"S20.0 E58.7\", \"latitude\":\"-20.0\", \"longitude\":\"58.7\"},\n        {\"name\":\"S71.4 W40.7\", \"latitude\":\"-71.4\", \"longitude\":\"-40.7\"},\n        {\"name\":\"N78.7 W8.9\", \"latitude\":\"78.7\", \"longitude\":\"-8.9\"},\n        {\"name\":\"N80.4 W40.6\", \"latitude\":\"80.4\", \"longitude\":\"-40.6\"},\n        {\"name\":\"S61.3 W170.4\", \"latitude\":\"-61.3\", \"longitude\":\"-170.4\"},\n        {\"name\":\"N58.7 W79.3\", \"latitude\":\"58.7\", \"longitude\":\"-79.3\"},\n        {\"name\":\"S9.1 E120.0\", \"latitude\":\"-9.1\", \"longitude\":\"120.0\"},\n        {\"name\":\"N31.0 W11.2\", \"latitude\":\"31.0\", \"longitude\":\"-11.2\"},\n        {\"name\":\"N48.8 E90.2\", \"latitude\":\"48.8\", \"longitude\":\"90.2\"},\n        {\"name\":\"N28.5 W59.7\", \"latitude\":\"28.5\", \"longitude\":\"-59.7\"},\n        {\"name\":\"S20.5 W38.5\", \"latitude\":\"-20.5\", \"longitude\":\"-38.5\"},\n        {\"name\":\"N41.0 E130.9\", \"latitude\":\"41.0\", \"longitude\":\"130.9\"},\n        {\"name\":\"N59.6 E129.5\", \"latitude\":\"59.6\", \"longitude\":\"129.5\"},\n        {\"name\":\"N0.6 W138.6\", \"latitude\":\"0.6\", \"longitude\":\"-138.6\"},\n        {\"name\":\"N70.0 E90.1\", \"latitude\":\"70.0\", \"longitude\":\"90.1\"},\n        {\"name\":\"S50.9 W138.4\", \"latitude\":\"-50.9\", \"longitude\":\"-138.4\"},\n        {\"name\":\"N40.8 E8.8\", \"latitude\":\"40.8\", \"longitude\":\"8.8\"},\n        {\"name\":\"S49.4 E29.3\", \"latitude\":\"-49.4\", \"longitude\":\"29.3\"},\n        {\"name\":\"N70.8 W111.3\", \"latitude\":\"70.8\", \"longitude\":\"-111.3\"},\n        {\"name\":\"S68.9 E130.1\", \"latitude\":\"-68.9\", \"longitude\":\"130.1\"},\n        {\"name\":\"N69.7 W39.8\", \"latitude\":\"69.7\", \"longitude\":\"-39.8\"},\n        {\"name\":\"N51.0 W19.8\", \"latitude\":\"51.0\", \"longitude\":\"-19.8\"},\n        {\"name\":\"S80.5 E149.4\", \"latitude\":\"-80.5\", \"longitude\":\"149.4\"},\n        {\"name\":\"S50.1 W149.7\", \"latitude\":\"-50.1\", \"longitude\":\"-149.7\"},\n        {\"name\":\"S38.7 W11.2\", \"latitude\":\"-38.7\", \"longitude\":\"-11.2\"},\n        {\"name\":\"S11.1 W100.0\", \"latitude\":\"-11.1\", \"longitude\":\"-100.0\"},\n        {\"name\":\"N70.7 E161.2\", \"latitude\":\"70.7\", \"longitude\":\"161.2\"},\n        {\"name\":\"S31.5 E0.6\", \"latitude\":\"-31.5\", \"longitude\":\"0.6\"},\n        {\"name\":\"N11.4 W118.9\", \"latitude\":\"11.4\", \"longitude\":\"-118.9\"},\n        {\"name\":\"N80.4 E60.8\", \"latitude\":\"80.4\", \"longitude\":\"60.8\"},\n        {\"name\":\"S8.8 W159.8\", \"latitude\":\"-8.8\", \"longitude\":\"-159.8\"},\n        {\"name\":\"N60.6 W88.4\", \"latitude\":\"60.6\", \"longitude\":\"-88.4\"},\n        {\"name\":\"S39.1 W48.7\", \"latitude\":\"-39.1\", \"longitude\":\"-48.7\"},\n        {\"name\":\"S69.1 W140.7\", \"latitude\":\"-69.1\", \"longitude\":\"-140.7\"},\n        {\"name\":\"N58.9 W50.1\", \"latitude\":\"58.9\", \"longitude\":\"-50.1\"},\n        {\"name\":\"S58.7 W18.8\", \"latitude\":\"-58.7\", \"longitude\":\"-18.8\"},\n        {\"name\":\"N81.2 E118.8\", \"latitude\":\"81.2\", \"longitude\":\"118.8\"},\n        {\"name\":\"S10.9 E51.0\", \"latitude\":\"-10.9\", \"longitude\":\"51.0\"},\n        {\"name\":\"S80.7 W89.1\", \"latitude\":\"-80.7\", \"longitude\":\"-89.1\"},\n        {\"name\":\"S68.5 E51.5\", \"latitude\":\"-68.5\", \"longitude\":\"51.5\"},\n        {\"name\":\"N0.6 E78.8\", \"latitude\":\"0.6\", \"longitude\":\"78.8\"},\n        {\"name\":\"N80.8 W21.0\", \"latitude\":\"80.8\", \"longitude\":\"-21.0\"},\n        {\"name\":\"N50.3 W40.7\", \"latitude\":\"50.3\", \"longitude\":\"-40.7\"},\n        {\"name\":\"N51.0 E68.9\", \"latitude\":\"51.0\", \"longitude\":\"68.9\"},\n        {\"name\":\"S59.4 W110.4\", \"latitude\":\"-59.4\", \"longitude\":\"-110.4\"},\n        {\"name\":\"N18.6 E170.0\", \"latitude\":\"18.6\", \"longitude\":\"170.0\"},\n        {\"name\":\"N69.5 W89.8\", \"latitude\":\"69.5\", \"longitude\":\"-89.8\"},\n        {\"name\":\"N11.3 E88.5\", \"latitude\":\"11.3\", \"longitude\":\"88.5\"},\n        {\"name\":\"N60.2 W139.7\", \"latitude\":\"60.2\", \"longitude\":\"-139.7\"},\n        {\"name\":\"S29.6 W159.2\", \"latitude\":\"-29.6\", \"longitude\":\"-159.2\"},\n        {\"name\":\"N41.4 E19.7\", \"latitude\":\"41.4\", \"longitude\":\"19.7\"},\n        {\"name\":\"N78.4 E79.4\", \"latitude\":\"78.4\", \"longitude\":\"79.4\"},\n        {\"name\":\"S38.7 W169.5\", \"latitude\":\"-38.7\", \"longitude\":\"-169.5\"},\n        {\"name\":\"N19.5 W10.3\", \"latitude\":\"19.5\", \"longitude\":\"-10.3\"},\n        {\"name\":\"S18.5 W1.2\", \"latitude\":\"-18.5\", \"longitude\":\"-1.2\"},\n        {\"name\":\"N41.0 W18.9\", \"latitude\":\"41.0\", \"longitude\":\"-18.9\"},\n        {\"name\":\"S48.9 E100.3\", \"latitude\":\"-48.9\", \"longitude\":\"100.3\"},\n        {\"name\":\"S59.1 W130.0\", \"latitude\":\"-59.1\", \"longitude\":\"-130.0\"},\n        {\"name\":\"N58.7 W150.9\", \"latitude\":\"58.7\", \"longitude\":\"-150.9\"},\n        {\"name\":\"N68.7 W20.5\", \"latitude\":\"68.7\", \"longitude\":\"-20.5\"},\n        {\"name\":\"N60.5 E169.2\", \"latitude\":\"60.5\", \"longitude\":\"169.2\"},\n        {\"name\":\"S20.5 E98.9\", \"latitude\":\"-20.5\", \"longitude\":\"98.9\"},\n        {\"name\":\"S40.8 W100.4\", \"latitude\":\"-40.8\", \"longitude\":\"-100.4\"},\n        {\"name\":\"S81.3 W109.1\", \"latitude\":\"-81.3\", \"longitude\":\"-109.1\"},\n        {\"name\":\"S19.5 E170.0\", \"latitude\":\"-19.5\", \"longitude\":\"170.0\"},\n        {\"name\":\"S31.0 W130.6\", \"latitude\":\"-31.0\", \"longitude\":\"-130.6\"},\n        {\"name\":\"N8.7 W139.6\", \"latitude\":\"8.7\", \"longitude\":\"-139.6\"},\n        {\"name\":\"N50.4 W49.4\", \"latitude\":\"50.4\", \"longitude\":\"-49.4\"},\n        {\"name\":\"S58.5 W98.6\", \"latitude\":\"-58.5\", \"longitude\":\"-98.6\"},\n        {\"name\":\"S19.0 E111.0\", \"latitude\":\"-19.0\", \"longitude\":\"111.0\"},\n        {\"name\":\"N71.2 E60.3\", \"latitude\":\"71.2\", \"longitude\":\"60.3\"},\n        {\"name\":\"S19.3 W80.6\", \"latitude\":\"-19.3\", \"longitude\":\"-80.6\"},\n        {\"name\":\"S28.9 E81.3\", \"latitude\":\"-28.9\", \"longitude\":\"81.3\"},\n        {\"name\":\"N79.3 E21.1\", \"latitude\":\"79.3\", \"longitude\":\"21.1\"},\n        {\"name\":\"S61.1 E21.4\", \"latitude\":\"-61.1\", \"longitude\":\"21.4\"},\n        {\"name\":\"N59.7 E109.0\", \"latitude\":\"59.7\", \"longitude\":\"109.0\"},\n        {\"name\":\"N30.2 E140.3\", \"latitude\":\"30.2\", \"longitude\":\"140.3\"},\n        {\"name\":\"S10.6 E171.2\", \"latitude\":\"-10.6\", \"longitude\":\"171.2\"},\n        {\"name\":\"S18.8 E80.6\", \"latitude\":\"-18.8\", \"longitude\":\"80.6\"},\n        {\"name\":\"N9.1 W131.3\", \"latitude\":\"9.1\", \"longitude\":\"-131.3\"},\n        {\"name\":\"S51.4 W79.9\", \"latitude\":\"-51.4\", \"longitude\":\"-79.9\"},\n        {\"name\":\"N58.5 W101.0\", \"latitude\":\"58.5\", \"longitude\":\"-101.0\"},\n        {\"name\":\"S28.7 E9.4\", \"latitude\":\"-28.7\", \"longitude\":\"9.4\"},\n        {\"name\":\"N28.9 E69.8\", \"latitude\":\"28.9\", \"longitude\":\"69.8\"},\n        {\"name\":\"N20.5 E50.4\", \"latitude\":\"20.5\", \"longitude\":\"50.4\"},\n        {\"name\":\"S71.4 E109.3\", \"latitude\":\"-71.4\", \"longitude\":\"109.3\"},\n        {\"name\":\"N9.9 W61.6\", \"latitude\":\"9.9\", \"longitude\":\"-61.6\"},\n        {\"name\":\"N0.2 E40.8\", \"latitude\":\"0.2\", \"longitude\":\"40.8\"},\n        {\"name\":\"N40.8 E141.0\", \"latitude\":\"40.8\", \"longitude\":\"141.0\"},\n        {\"name\":\"S20.8 W29.2\", \"latitude\":\"-20.8\", \"longitude\":\"-29.2\"},\n        {\"name\":\"N40.2 E118.5\", \"latitude\":\"40.2\", \"longitude\":\"118.5\"},\n        {\"name\":\"S10.4 W19.3\", \"latitude\":\"-10.4\", \"longitude\":\"-19.3\"},\n        {\"name\":\"N9.6 W110.7\", \"latitude\":\"9.6\", \"longitude\":\"-110.7\"},\n        {\"name\":\"S80.9 E30.7\", \"latitude\":\"-80.9\", \"longitude\":\"30.7\"},\n        {\"name\":\"N21.4 E30.6\", \"latitude\":\"21.4\", \"longitude\":\"30.6\"},\n        {\"name\":\"S19.2 W139.3\", \"latitude\":\"-19.2\", \"longitude\":\"-139.3\"},\n        {\"name\":\"N19.2 W18.8\", \"latitude\":\"19.2\", \"longitude\":\"-18.8\"},\n        {\"name\":\"N21.5 E80.0\", \"latitude\":\"21.5\", \"longitude\":\"80.0\"},\n        {\"name\":\"S59.9 E101.0\", \"latitude\":\"-59.9\", \"longitude\":\"101.0\"},\n        {\"name\":\"S19.9 E159.0\", \"latitude\":\"-19.9\", \"longitude\":\"159.0\"},\n        {\"name\":\"S31.5 W139.4\", \"latitude\":\"-31.5\", \"longitude\":\"-139.4\"},\n        {\"name\":\"S40.1 W159.2\", \"latitude\":\"-40.1\", \"longitude\":\"-159.2\"},\n        {\"name\":\"N40.7 W1.0\", \"latitude\":\"40.7\", \"longitude\":\"-1.0\"},\n        {\"name\":\"N51.1 E98.4\", \"latitude\":\"51.1\", \"longitude\":\"98.4\"},\n        {\"name\":\"N10.4 W171.0\", \"latitude\":\"10.4\", \"longitude\":\"-171.0\"},\n        {\"name\":\"N49.5 E159.9\", \"latitude\":\"49.5\", \"longitude\":\"159.9\"},\n        {\"name\":\"S71.0 W18.9\", \"latitude\":\"-71.0\", \"longitude\":\"-18.9\"},\n        {\"name\":\"N8.8 W99.9\", \"latitude\":\"8.8\", \"longitude\":\"-99.9\"},\n        {\"name\":\"N29.0 E171.1\", \"latitude\":\"29.0\", \"longitude\":\"171.1\"},\n        {\"name\":\"N39.6 E169.4\", \"latitude\":\"39.6\", \"longitude\":\"169.4\"},\n        {\"name\":\"S69.6 W91.0\", \"latitude\":\"-69.6\", \"longitude\":\"-91.0\"},\n        {\"name\":\"S11.4 W61.5\", \"latitude\":\"-11.4\", \"longitude\":\"-61.5\"},\n        {\"name\":\"N21.4 E150.0\", \"latitude\":\"21.4\", \"longitude\":\"150.0\"},\n        {\"name\":\"S8.9 W110.6\", \"latitude\":\"-8.9\", \"longitude\":\"-110.6\"},\n        {\"name\":\"S59.0 W160.5\", \"latitude\":\"-59.0\", \"longitude\":\"-160.5\"},\n        {\"name\":\"N38.9 E109.6\", \"latitude\":\"38.9\", \"longitude\":\"109.6\"},\n        {\"name\":\"S79.2 E131.2\", \"latitude\":\"-79.2\", \"longitude\":\"131.2\"},\n        {\"name\":\"S81.0 W69.8\", \"latitude\":\"-81.0\", \"longitude\":\"-69.8\"},\n        {\"name\":\"S38.9 W29.3\", \"latitude\":\"-38.9\", \"longitude\":\"-29.3\"},\n        {\"name\":\"S10.2 E21.6\", \"latitude\":\"-10.2\", \"longitude\":\"21.6\"},\n        {\"name\":\"N50.8 W109.5\", \"latitude\":\"50.8\", \"longitude\":\"-109.5\"},\n        {\"name\":\"S1.5 E141.1\", \"latitude\":\"-1.5\", \"longitude\":\"141.1\"},\n        {\"name\":\"S48.8 E70.7\", \"latitude\":\"-48.8\", \"longitude\":\"70.7\"},\n        {\"name\":\"N41.1 W111.4\", \"latitude\":\"41.1\", \"longitude\":\"-111.4\"},\n        {\"name\":\"N41.1 W171.1\", \"latitude\":\"41.1\", \"longitude\":\"-171.1\"},\n        {\"name\":\"S19.3 W9.3\", \"latitude\":\"-19.3\", \"longitude\":\"-9.3\"},\n        {\"name\":\"N49.1 E49.7\", \"latitude\":\"49.1\", \"longitude\":\"49.7\"},\n        {\"name\":\"N39.0 E41.5\", \"latitude\":\"39.0\", \"longitude\":\"41.5\"},\n        {\"name\":\"S40.2 E20.1\", \"latitude\":\"-40.2\", \"longitude\":\"20.1\"},\n        {\"name\":\"N68.6 W130.7\", \"latitude\":\"68.6\", \"longitude\":\"-130.7\"},\n        {\"name\":\"S71.1 W111.5\", \"latitude\":\"-71.1\", \"longitude\":\"-111.5\"},\n        {\"name\":\"S71.2 E90.2\", \"latitude\":\"-71.2\", \"longitude\":\"90.2\"},\n        {\"name\":\"S10.8 W80.1\", \"latitude\":\"-10.8\", \"longitude\":\"-80.1\"},\n        {\"name\":\"S69.4 W130.7\", \"latitude\":\"-69.4\", \"longitude\":\"-130.7\"},\n        {\"name\":\"S41.5 E9.2\", \"latitude\":\"-41.5\", \"longitude\":\"9.2\"},\n        {\"name\":\"S41.2 E70.7\", \"latitude\":\"-41.2\", \"longitude\":\"70.7\"},\n        {\"name\":\"S19.0 E38.6\", \"latitude\":\"-19.0\", \"longitude\":\"38.6\"},\n        {\"name\":\"S29.7 E51.2\", \"latitude\":\"-29.7\", \"longitude\":\"51.2\"},\n        {\"name\":\"N80.2 W161.3\", \"latitude\":\"80.2\", \"longitude\":\"-161.3\"},\n        {\"name\":\"S60.8 W40.8\", \"latitude\":\"-60.8\", \"longitude\":\"-40.8\"},\n        {\"name\":\"S19.2 W68.9\", \"latitude\":\"-19.2\", \"longitude\":\"-68.9\"},\n        {\"name\":\"N8.5 E81.4\", \"latitude\":\"8.5\", \"longitude\":\"81.4\"},\n        {\"name\":\"N29.9 W50.8\", \"latitude\":\"29.9\", \"longitude\":\"-50.8\"},\n        {\"name\":\"N68.9 E99.6\", \"latitude\":\"68.9\", \"longitude\":\"99.6\"},\n        {\"name\":\"N9.2 W90.9\", \"latitude\":\"9.2\", \"longitude\":\"-90.9\"},\n        {\"name\":\"N70.8 W50.4\", \"latitude\":\"70.8\", \"longitude\":\"-50.4\"},\n        {\"name\":\"N61.5 E149.4\", \"latitude\":\"61.5\", \"longitude\":\"149.4\"},\n        {\"name\":\"S38.9 W129.9\", \"latitude\":\"-38.9\", \"longitude\":\"-129.9\"},\n        {\"name\":\"N78.9 E101.1\", \"latitude\":\"78.9\", \"longitude\":\"101.1\"},\n        {\"name\":\"N29.9 W140.7\", \"latitude\":\"29.9\", \"longitude\":\"-140.7\"},\n        {\"name\":\"N18.9 W151.6\", \"latitude\":\"18.9\", \"longitude\":\"-151.6\"},\n        {\"name\":\"S39.5 W81.1\", \"latitude\":\"-39.5\", \"longitude\":\"-81.1\"},\n        {\"name\":\"N41.3 W131.4\", \"latitude\":\"41.3\", \"longitude\":\"-131.4\"},\n        {\"name\":\"N69.3 W100.1\", \"latitude\":\"69.3\", \"longitude\":\"-100.1\"},\n        {\"name\":\"N61.5 E18.7\", \"latitude\":\"61.5\", \"longitude\":\"18.7\"},\n        {\"name\":\"S30.2 E19.9\", \"latitude\":\"-30.2\", \"longitude\":\"19.9\"}\n ]\n}"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "tour-request-5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ded13342-1dd4-4f11-8384-d01d3d705769",
+                "exec": [
+                  "pm.test(\"fisher25 - tour endpoint found\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"fisher25 - returnType is tour\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.requestType).to.eql(\"tour\");",
+                  "});",
+                  "pm.test(\"fisher25 - response time doesn't change\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    pm.expect(returnedJSON.response).to.eql(0);",
+                  "});",
+                  "pm.test(\"fisher25 - list isn't optimized\", function() {",
+                  "    let returnedJSON = pm.response.json();",
+                  "    let distanceURL = pm.environment.get('BASE_URL') + \"/api/distances\";",
+                  "    pm.sendRequest({",
+                  "        url: distanceURL,",
+                  "        method: 'POST',",
+                  "        body: {",
+                  "            mode: 'raw',",
+                  "            raw: JSON.stringify({\"places\": returnedJSON.places, \"earthRadius\": 3959, \"requestType\": \"distances\"})",
+                  "        }",
+                  "    }, function (err, res) {",
+                  "        let distanceJSON = res.json();",
+                  "        let optimizedSum = 0;",
+                  "        for (let i = 0; i < distanceJSON.distances.length; i++) {",
+                  "            optimizedSum = optimizedSum + distanceJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(optimizedSum).is.eql(222504);",
+                  "    });",
+                  "});",
+                  "pm.test(\"fisher25 - response time is less than 1 sec\", function() {",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "aa738564-5466-406c-9e1d-d9cb0c1b1835",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"tour\",\n    \"response\": 0,\n    \"earthRadius\": 3959,\n    \"places\"        : [{\"name\":\"place1\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place2\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place3\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place4\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place5\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place6\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place7\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place8\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place9\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place10\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place11\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place12\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place13\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place14\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place15\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place16\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place17\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place18\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place19\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place20\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place21\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place22\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place23\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place24\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place25\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place26\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place27\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place28\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place29\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place30\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place31\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place32\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place33\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"},\n                        {\"name\":\"place34\", \"latitude\":  \"40.6\",  \"longitude\": \"-105.1\"},\n                        {\"name\": \"place35\", \"latitude\":  \"-33.9\", \"longitude\": \"151.2\"},\n                        {\"name\": \"place36\", \"latitude\":  \"-57.9\", \"longitude\": \"175.2\"}]\n}\n"
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        }
+      ],
+      "id": "00e82941-f796-4e22-b80a-97b1e7375a8e"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "600f2e92-c00d-48ba-83dd-2f3f2838b080",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "4bffa881-a6ba-4002-ae1a-124d9f56a84c",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "34138746-6f36-4df4-b4d2-ab4e3014a876",
+      "key": "CURRENT_VERSION",
+      "value": "1"
+    },
+    {
+      "id": "d9621d41-8162-44c6-9304-3adca9ff43e7",
+      "key": "BASE_URL",
+      "value": "http://localhost:41317"
+    },
+    {
+      "id": "ae6bedd7-fe58-4559-a4cc-5af3b4ee194c",
+      "key": "TEAM_NAME",
+      "value": "t17 The Moist Pigeons"
+    }
+  ]
+}

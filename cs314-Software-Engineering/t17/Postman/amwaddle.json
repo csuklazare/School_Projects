@@ -1,0 +1,609 @@
+{
+  "info": {
+    "_postman_id": "5f96246e-4b1f-46c3-9a43-886a95b80e4d",
+    "name": "cs314-collection-template",
+    "description": "This is a template collection for CS314.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Config",
+      "item": [
+        {
+          "name": "Config_request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "16f0feac-e61a-434b-bb8f-9bd332cdf197",
+                "exec": [
+                  "pm.test(\"amwaddle - returned type is config\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"config\");",
+                  "});",
+                  "pm.test(\"amwaddle - response status 200\", function() {",
+                  "        pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "cbd4eae4-8d95-4117-96ec-afc6c56db2c5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true,
+            "disabledSystemHeaders": {}
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"config\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/config",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "config"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f8f3d84e-7557-441c-92d8-afe32d66f945"
+    },
+    {
+      "name": "Distances",
+      "item": [
+        {
+          "name": "Distances_test1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "843fb269-548c-4e9d-9bd6-719416fa98c0",
+                "exec": [
+                  "pm.test(\"amwaddle - response status 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type matches request type\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"distances\");",
+                  "});",
+                  "pm.test(\"amwaddle - earth radius sent matches earth radius in response\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.earthRadius).to.eql(6000);",
+                  "});",
+                  "pm.test(\"amwaddle - distances correctly returned\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.distances[0]).to.eql(56);",
+                  "    pm.expect(responseJSON.distances[1]).to.eql(1430);",
+                  "    pm.expect(responseJSON.distances[2]).to.eql(1436);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "be9adeab-734d-4f43-b017-910cebf0fad7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\n{\n\t\"requestType\": \"distances\",\n\t\"places\": [{\n\t\t\t\"name\": \"Lagunitas Brewery\",\n\t\t\t\"latitude\": \"38.272648\",\n\t\t\t\"longitude\": \"-122.661920\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"Buena Vista Bar\",\n\t\t\t\"latitude\": \"37.767220\",\n\t\t\t\"longitude\": \"-122.438200\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"Homegrown Tap and Dough\",\n\t\t\t\"latitude\": \"39.799247\",\n\t\t\t\"longitude\": \"-105.081629\"\n\t\t}\n\t],\n\t\"earthRadius\": 6000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "Distances_test2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "97a24577-6630-43de-80f1-d996d1ad14c3",
+                "exec": [
+                  "pm.test(\"amwaddle - response status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type matches request type\", function () {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"distances\");",
+                  "});",
+                  "pm.test(\"amwaddle - earth radius sent matches earth radius in response\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.earthRadius).to.eql(6371.0);",
+                  "});",
+                  "pm.test(\"amwaddle - distances correctly returned\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.distances[0]).to.eql(299);",
+                  "    pm.expect(responseJSON.distances[1]).to.eql(136);",
+                  "    pm.expect(responseJSON.distances[2]).to.eql(435);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "4778211c-0e80-4f00-9921-84f7d06d6d2e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestType\": \"distances\",\n  \"places\":\n  [\n    {\"name\": \"Boston, Massachusetts\", \"latitude\":  \"42.3601\",  \"longitude\": \"-71.0589\"},\n    {\"name\": \"Manhattan, New York\", \"latitude\":  \"40.7831\", \"longitude\": \"-73.9712\"},\n    {\"name\": \"Philadelphia, Pennsylvania\", \"latitude\":  \"39.9526\", \"longitude\": \"-75.1652\"}\n  ],\n  \"earthRadius\"   : 6371.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        },
+        {
+          "name": "Distances_test3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "62130eab-7e02-4f03-b020-6da79780cf31",
+                "exec": [
+                  "pm.test(\"amwaddle - response status 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type matches request type\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"distances\");",
+                  "});",
+                  "pm.test(\"amwaddle - earth radius sent matches earth radius in response\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.earthRadius).to.eql(1);",
+                  "});",
+                  "pm.test(\"amwaddle - distances correctly returned\", function() {",
+                  "    let responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.distances[0]).to.eql(0);",
+                  "    pm.expect(responseJSON.distances[1]).to.eql(1);",
+                  "    pm.expect(responseJSON.distances[2]).to.eql(3);",
+                  "    pm.expect(responseJSON.distances[3]).to.eql(2);",
+                  "    pm.expect(responseJSON.distances[4]).to.eql(0);",
+                  "    pm.expect(responseJSON.distances[5]).to.eql(1);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "76905bcf-266c-4048-8073-a57201f562c6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\n{\n  \"requestType\"    : \"distances\",\n  \"places\"         : [\n                      {\"name\": \"Edgy East\", \"latitude\":  \"0.0\",  \"longitude\": \"180.0\"},\n                      {\"name\": \"Edgy West\", \"latitude\":  \"0.0\", \"longitude\": \"-180.0\"},\n                      {\"name\": \"Edgy North\", \"latitude\":  \"90.0\", \"longitude\": \"0.0\"},\n                      {\"name\": \"Edgy South\", \"latitude\":  \"-90.0\", \"longitude\": \"0.0\"},\n                      {\"name\": \"Black Dog Smoke & Ale\", \"latitude\":  \"40.11\", \"longitude\": \"-88.207\"},\n                      {\"name\": \"The Refuge\", \"latitude\":  \"37.501\", \"longitude\": \"-122.255\"}\n                     ],\n  \"earthRadius\"    : 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        }
+      ],
+      "id": "8b825d5c-fa92-44df-b20e-19a3f4c1cfc8"
+    },
+    {
+      "name": "Find",
+      "item": [
+        {
+          "name": "Find_test1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9660bc2b-b76e-487e-9ae0-4deb248d3f37",
+                "exec": [
+                  "pm.test(\"amwaddle - find endpoint status of 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type matches request type\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"find\");",
+                  "});",
+                  "pm.test(\"amwaddle - limit of returned locations matches request\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.limit).to.equal(5);",
+                  "});",
+                  "pm.test(\"amwaddle - number of locations found is correct\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.found).to.equal(2150);",
+                  "});",
+                  "pm.test(\"amwaddle - request match is equal to response match\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.match).to.eql(\"Texas\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "56605a9e-637b-43f9-a5b9-9f0a9501366c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"match\": \"Texas\",    \n    \"limit\": 5,    \n    \"requestType\": \"find\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "Find_test2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "639a5cf0-8907-45e9-9591-f246379ec2f3",
+                "exec": [
+                  "pm.test(\"amwaddle - find endpoint status of 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type matches request type\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"find\");",
+                  "});",
+                  "pm.test(\"amwaddle - limit of returned locations matches request\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.limit).to.equal(20);",
+                  "});",
+                  "pm.test(\"amwaddle - number of locations found is correct\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.found).to.equal(309);",
+                  "});",
+                  "pm.test(\"amwaddle - request match is equal to response match\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.match).to.eql(\" /\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "0baf3262-10fd-4980-af76-e973b29cfa17",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"match\": \" /\",    \n    \"limit\": 20,    \n    \"requestType\": \"find\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        },
+        {
+          "name": "Find_test3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "721d20c2-fe77-471c-b742-16634ff68896",
+                "exec": [
+                  "pm.test(\"amwaddle - find endpoint status of 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type matches request type\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.eql(\"find\");",
+                  "});",
+                  "pm.test(\"amwaddle - limit of returned locations matches request\", function() {",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.limit).to.equal(5);",
+                  "});",
+                  "pm.test(\"amwaddle - number of locations found is correct\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.found).to.equal(28);",
+                  "});",
+                  "pm.test(\"amwaddle - request match is equal to response match\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.match).to.eql(\"Dave\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "27a9e4ce-59d5-4923-a36b-bfa3d9821e19",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"match\": \"Dave\",    \n    \"limit\": 5,    \n    \"requestType\": \"find\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        }
+      ],
+      "id": "54a2c1f1-e629-4635-9040-aaf9d91845e0"
+    },
+    {
+      "name": "Tour",
+      "item": [
+        {
+          "name": "Tour_test1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "de8a9589-81b0-4e08-82ea-9af704dd2a32",
+                "exec": [
+                  "pm.test(\"amwaddle - tour endpoint status of 200\", function(){",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type of request matches response\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.equal(\"tour\");",
+                  "});",
+                  "pm.test(\"amwaddle - response time is not altered in the response\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.response).to.equal(1);",
+                  "});",
+                  "pm.test(\"amwaddle - response time does not exceed 1 second\", function(){",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});",
+                  "pm.test(\"amwaddle - tour is optimized in response\", function(){",
+                  "    }, function (err, res) {",
+                  "        let returnJSON = res.json();",
+                  "        let totalDistOptimized = 0;",
+                  "        for (let i = 0; i < returnJSON.distances.length; i++) {",
+                  "            totalDistOptimized += returnJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(totalDistOptimized).is.lte(21690);",
+                  "    }); "
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "c484f21f-1b6e-4476-a76c-36004aa75b88",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\n{\n    \"requestType\": \"tour\",\n    \"response\": 1,\n    \"earthRadius\": 3959.0,\n    \"places\":[\n        {\"latitude\": \"45\",\n        \"longitude\": \"0\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"45\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"0\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"45\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"0\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"45\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"0\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"45\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"0\"},\n        {\"latitude\": \"45\",\n        \"longitude\": \"45\"}\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "Tour_test2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "98b0ac85-9090-45aa-b613-9407b9d424ce",
+                "exec": [
+                  "pm.test(\"amwaddle - tour endpoint status of 200\", function(){",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type of request matches response\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.equal(\"tour\");",
+                  "});",
+                  "pm.test(\"amwaddle - response time is not altered in the response\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.response).to.equal(1);",
+                  "});",
+                  "pm.test(\"amwaddle - response time does not exceed 1 second\", function(){",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});",
+                  "pm.test(\"amwaddle - tour is optimized in response\", function(){",
+                  "    }, function (err, res) {",
+                  "        const returnJSON = res.json();",
+                  "        let totalDistOptimized = 0;",
+                  "        for (let i = 0; i < returnJSON.distances.length; i++) {",
+                  "            totalDistOptimized += returnJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(totalDistOptimized).is.lte(27478);",
+                  "    }); "
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "27eb2be7-9bb6-4b41-b8f6-50a767eaa68d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\n{\n  \t\"requestType\"\t: \"tour\",\n  \t\"earthRadius\"\t: 6371.0,\n  \t\"response\"\t\t: 1,\n   \t\"places\"\t\t: [{\"name\":\"Alaska Zoo\", \"latitude\":  \"61.14\",  \"longitude\": \"-149.79\"},\n                      {\"name\": \"Huffman Park\", \"latitude\":  \"61.11\", \"longitude\": \"-149.80\"},\n                      {\"name\": \"Alyeska Resort\", \"latitude\":  \"60.97\", \"longitude\": \"-149.10\"},\n                      {\"name\": \"Denali\", \"latitude\":  \"63.08\", \"longitude\": \"-151.00\"},\n                      {\"name\": \"Khatyrka\", \"latitude\":  \"62.06\", \"longitude\": \"175.28\"},\n                      {\"name\": \"Brisbane\", \"latitude\":  \"-27.37\", \"longitude\": \"153.03\"},\n                      {\"name\": \"Antofagasta\", \"latitude\":  \"-23.58\", \"longitude\": \"-70.43\"},\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\n                      {\"name\": \"Cologne Cathedral\", \"latitude\":  \"50.95\", \"longitude\": \"6.96\"},\n                      {\"name\": \"Dom Treasury\", \"latitude\":  \"50.94\", \"longitude\": \"6.96\"},\n                       {\"name\": \"Munich Residenz\", \"latitude\":  \"48.14\", \"longitude\": \"11.57\"}\n                      ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        },
+        {
+          "name": "Tour_test3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bb8f2af1-8d7f-4ab5-bafd-f4d90b6d4b0a",
+                "exec": [
+                  "pm.test(\"amwaddle - tour endpoint status of 200\", function(){",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"amwaddle - return type of request matches response\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.requestType).to.equal(\"tour\");",
+                  "});",
+                  "pm.test(\"amwaddle - response time is not altered in the response\", function(){",
+                  "    const responseJSON = pm.response.json();",
+                  "    pm.expect(responseJSON.response).to.equal(1);",
+                  "});",
+                  "pm.test(\"amwaddle - response time does not exceed 1 second\", function(){",
+                  "    pm.expect(pm.response.responseTime/1000).to.be.lessThan(1);",
+                  "});",
+                  "pm.test(\"amwaddle - tour is optimized in response\", function(){",
+                  "    }, function (err, res) {",
+                  "        const returnJSON = res.json();",
+                  "        let totalDistOptimized = 0;",
+                  "        for (let i = 0; i < returnJSON.distances.length; i++) {",
+                  "            totalDistOptimized += returnJSON.distances[i];",
+                  "        };",
+                  "        pm.expect(totalDistOptimized).is.lte(11709);",
+                  "        //pm.expect(totalDistOptimized).to.eql(7889);",
+                  "    }); "
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "d9d43c6c-11d2-46a1-95cf-b8e95536b34e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \t\"requestType\"\t: \"tour\",\n  \t\"earthRadius\"\t: 6371.0,\n  \t\"response\"\t\t: 1,\n   \t\"places\"\t\t: [{\"name\":\"Lake California Air Park\", \"latitude\":  \"40.36109924316406\",  \"longitude\": \"-122.21600341796875\"},\n                      {\"name\": \"Colorado Antique Field\", \"latitude\":  \"40.122501373291016\", \"longitude\": \"-105.1719970703125\"},\n                      {\"name\": \"Nevada Municipal Airport\", \"latitude\":  \"37.85210037231445\", \"longitude\": \"-94.30490112304688\"},\n                      {\"name\": \"New Germany Seaplane Base\", \"latitude\":  \"44.54999923706055\", \"longitude\": \"-64.75\"},\n                      {\"name\": \"South Texas Project Heliport\", \"latitude\":  \"28.792200088500977\", \"longitude\": \"-96.04190063476562\"},\n                      {\"name\": \"Central Florida Regional Hospital Heliport\", \"latitude\":  \"28.813681\", \"longitude\": \"-81.283731\"},\n                      {\"name\": \"Fort Erie (Eurocopter Canada) Heliport\", \"latitude\":  \"42.921189708\", \"longitude\": \"-78.9561331272\"},\n                      {\"name\": \"Cozby-Germany Hospital Heliport\", \"latitude\":  \"32.67620086669922\", \"longitude\": \"-95.72630310058594\"},\n                      {\"name\": \"Nevada Dept of Wildlife State Headquarters Heliport\", \"latitude\":  \"39.5396003723\", \"longitude\": \"-119.806999207\"},\n                      {\"name\": \"Colorado Springs East Airport\", \"latitude\":  \"38.8744010925293\", \"longitude\": \"-104.41000366210938\"},\n                       {\"name\": \"California Title Building Heliport\", \"latitude\":  \"34.1239013671875\", \"longitude\": \"-118.1510009765625\"}\n                      ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        }
+      ],
+      "id": "161a01f1-ccad-4e13-b20d-14ce2ba1c18f"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "cbaabba2-f14b-447c-9da5-ce192a85034c",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "843eab74-cfab-4d8b-aa82-2bc2ce8e3ee3",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "b668d03f-d37b-43fa-9766-cfc4d5f67752",
+      "key": "CURRENT_VERSION",
+      "value": "1"
+    },
+    {
+      "id": "3970a92f-30bd-4b1b-a4fd-a223a686ebe8",
+      "key": "BASE_URL",
+      "value": "http://localhost:41317"
+    },
+    {
+      "id": "b2bcda77-f198-472f-b50a-67e18ab125d4",
+      "key": "TEAM_NAME",
+      "value": "t17 The Moist Pigeons"
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "info": {
+    "_postman_id": "ba8bd8f2-1756-4aa3-b540-92b5d4bb8f3a",
+    "name": "cs314-collection-template",
+    "description": "This is a template collection for CS314.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "config",
+      "item": [
+        {
+          "name": "config-request",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "64affbff-76ff-450d-8535-e95f65b114d1",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "0a2eac0b-22fc-44ab-a72b-8a0a362550c6",
+                "exec": [
+                  "pm.test(\"henocky- Test config type and response status\", function () {",
+                  "    pm.expect(pm.response.to.have.status(200));",
+                  "",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.requestType).to.eql(\"config\");",
+                  "});",
+                  "",
+                  "/*pm.test(\"henocky- Test requestType is \\\"config\\\"\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.requestType).to.eql(\"config\");",
+                  "});*/"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "047fc2f0-4984-42b4-a065-3f2c8e9b3cf4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\" : \"config\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/config"
+          },
+          "response": []
+        }
+      ],
+      "id": "d5854571-694f-4a67-ab65-abb988a14582"
+    },
+    {
+      "name": "distances",
+      "item": [
+        {
+          "name": "distances-request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "dc6fbdc1-5182-4175-aef8-5f73f47a2688",
+                "exec": [
+                  "pm.test(\"henocky- Test HTTP200\", function () {",
+                  "    pm.expect(pm.response.to.have.status(200));",
+                  "});",
+                  "",
+                  "pm.test(\"henocky- Test requestType is \\\"distances\\\"\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.requestType).to.eql(\"distances\");",
+                  "});",
+                  "",
+                  "pm.test(\"henocky- test earthRadius is 6371\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.earthRadius).to.eql(6371);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "3c30105b-d803-4ef7-90f4-21277f114d27",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\" : \"distances\",\n    \"earthRadius\" : 6371,\n    \"places\"      : [\n        {\"name\": \"Golden Gate Bridge\", \"latitude\": \"37.82\",    \"longitude\":  \"-122.478611\"},\n        {\"name\": \"Galapagos Islands\",  \"latitude\": \"0.135278\", \"longitude\":  \"-90.625\"},\n        {\"name\": \"Equator Line\",       \"latitude\": \"0\",        \"longitude\":  \"-91.333889\"},\n        {\"name\": \"Mead\", \"latitude\":   \"40.2652003\",           \"longitude\":  \"-104.99307\"}]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/distances"
+          },
+          "response": []
+        }
+      ],
+      "id": "e2cdf3ca-bba3-4fdc-be61-11ff017db05c"
+    },
+    {
+      "name": "find",
+      "item": [
+        {
+          "name": "find-request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5b70eb4c-5de8-4ca0-8f67-9cf2f940016f",
+                "exec": [
+                  "pm.test(\"henocky- Test HTTP200\", function () {",
+                  "    pm.expect(pm.response.to.have.status(200));",
+                  "});",
+                  "",
+                  "pm.test(\"henocky- Test requestType is \\\"find\\\"\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.requestType).to.eql(\"find\");",
+                  "});",
+                  "",
+                  "pm.test(\"henocky- test 3rd place matching St.\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.places[3].name).to.eql(\"St. Joseph's Mercy Heliport\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "e45537b3-3b23-4d46-ae29-1466f1a9046d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\": \"find\",\n    \"match\": \"St.\",\n    \"limit\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/find"
+          },
+          "response": []
+        }
+      ],
+      "id": "0342e509-67b2-42aa-9a20-a169512e4f93"
+    },
+    {
+      "name": "tour",
+      "item": [
+        {
+          "name": "tour-request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f5eec618-c171-49bb-aba7-915013c7396a",
+                "exec": [
+                  "pm.test(\"henocky- Test HTTP200\", function () {",
+                  "    pm.expect(pm.response.to.have.status(200));",
+                  "});",
+                  "",
+                  "pm.test(\"henocky- Test requestType is \\\"tour\\\"\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.requestType).to.eql(\"tour\");",
+                  "});",
+                  "",
+                  "pm.test(\"henocky- tour response starts with Los Chankas\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.places[0].name).to.equal(\"Los Chankas\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "c8a5c4fe-1ade-429e-8b70-638aac7b07a0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"requestType\":  \"tour\",\n    \"earthRadius\":  3959.0,\n    \"response\"   :  1,\n    \"places\"     :  [\n        {\"name\": \"Los Chankas\",      \"latitude\": \"-13.5\", \"longitude\": \"-73.74\", \"notes\":  \"some place\"},\n        {\"name\":  \"Yanas\",            \"latitude\": \"-9.74\", \"longitude\": \"-76.73\", \"notes\":  \"another place\"},\n        {\"name\":  \"Napo\",             \"latitude\": \"-2.58\", \"longitude\": \"-74.27\", \"notes\":  \"place no.3\"},\n        {\"name\":  \"Troncal Central\",  \"latitude\": \"6.02\",  \"longitude\": \"-73.57\", \"notes\":  \"4th place\"},\n        {\"name\":  \"Padre Las Casas\",  \"latitude\": \"18.87\", \"longitude\": \"-70.93\", \"notes\":  \"a place\"},\n        {\"name\":  \"Inuvik Region\",      \"latitude\": \"69.8\", \"longitude\": \"-129.02\", \"notes\": \"6th place\"},\n        {\"name\":  \"Dehcho Region\",     \"latitude\": \"61.32\", \"longitude\": \"-123.22\", \"notes\":  \"7th place\"},\n        {\"name\":  \"Yukon\",             \"latitude\": \"65.01\", \"longitude\": \"-137.20\", \"notes\":  \"8th place\"},\n        {\"name\":  \"North Slave Region\",\"latitude\": \"63.24\",  \"longitude\": \"-118.30\", \"notes\":  \"9th place\"},\n        {\"name\":  \"Gwich'in Settlement Area\",  \"latitude\": \"67.35\", \"longitude\": \"-133.86\", \"notes\":  \"10th place\"},\n        {\"name\":  \"Sahtu Region\",       \"latitude\": \"66.24\", \"longitude\": \"-117.77\", \"notes\":  \"11th place\"}]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BASE_URL}}/api/tour"
+          },
+          "response": []
+        }
+      ],
+      "id": "a32afdc5-8eb9-4b7c-a7e3-46b3515eb8e4"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "f48ff7cc-c311-4313-bccb-dbc76cab28fa",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "e72dcb66-6102-4a3c-9e52-82fd0ea071ae",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "cb675e87-b889-43ca-8200-bc01daede82b",
+      "key": "CURRENT_VERSION",
+      "value": "1"
+    },
+    {
+      "id": "51cb376d-5c3d-48ae-8a37-a76205f4e2a1",
+      "key": "BASE_URL",
+      "value": "http://localhost:41317"
+    },
+    {
+      "id": "878d7f46-d874-401b-b66d-b931193f77ba",
+      "key": "TEAM_NAME",
+      "value": "t17 The Moist Pidgeons"
+    }
+  ]
+}
